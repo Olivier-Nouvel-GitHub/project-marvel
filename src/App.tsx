@@ -1,17 +1,14 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { Flex, Spacer } from "@chakra-ui/react";
+import { ChakraProvider, Box, Flex, Text } from "@chakra-ui/react";
 
 function App() {
+  // const boxes = [{ message: "Je suis la boîte 1" }];
+
   return (
     <div className="App">
       <ChakraProvider>
         <Flex justify="space-between" align="center">
-          <Box bg="green" w="120px" h="150px">
+          <Box bg="green" w="120px" h="150px" style={}>
             Je suis la boite 1
           </Box>
           <Box bg="red" w="120px" h="150px">
