@@ -3,34 +3,29 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { Flex, Spacer } from "@chakra-ui/react";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <ChakraProvider>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click here on the Vite and React logos to learn more
-      </p>
-    
-    </ChakraProvider>
+    <div className="App">
+      <ChakraProvider>
+        <Flex justify="space-between" align="center">
+          <Box bg="green" w="120px" h="150px">
+            Je suis la boite 1
+          </Box>
+          <Box bg="red" w="120px" h="150px">
+            Je suis la boite 2
+          </Box>
+          <Box bg="blue" w="120px" h="150px">
+            Je suis la boite 3
+          </Box>
+          <Box bg="yellow" w="120px" h="150px">
+            Je suis la boite 4
+          </Box>
+        </Flex>
+      </ChakraProvider>
+    </div>
   );
 }
 
