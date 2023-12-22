@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <ChakraProvider>
         <Flex justify="space-between" align="center">
-          <Box bg="green" w="120px" h="150px" style={}>
+          <Box bg="green" w="120px" h="150px">
             Je suis la boite 1
           </Box>
           <Box bg="red" w="120px" h="150px">
