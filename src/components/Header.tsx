@@ -21,21 +21,21 @@ const HeaderStyle = styled.div`
   padding-right: 0.5rem;
 `;
 
-const MenuProfileStyle = styled.div`
+const MenuProfileStyle = styled.div<{ isVisible: boolean }>`
   width: 15rem;
   border: solid 0.05rem white;
   position: absolute;
   right: 3rem;
   top: 5.25rem;
   color: white;
+  display: ${(props) => (props.isVisible ? "block" : "none")};
 
   ul {
-     display: flex;
-     flex-direction: column;
-     list-style-type: none;
-     margin-bottom: 0rem;
-     margin-top: 0rem;
-
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
   }
   li {
     margin-left: -2.5rem;
@@ -45,12 +45,13 @@ const MenuProfileStyle = styled.div`
     align-items: center;
   }
   a {
-  text-decoration: none;
-  color: #f8e2c9;
-  font-weight: bold;
-}
+    text-decoration: none;
+    color: #f8e2c9;
+    font-weight: bold;
+  }
   li:hover {
-  background-color: #084C7C; 
+    background-color: #084c7c;
+  }
 `;
 
 const ProfileStyle = styled.div`
@@ -110,9 +111,36 @@ const MenuStyle = styled.nav`
 `;
 
 export const Header = () => {
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [isMenuVisible, setMenuVisible] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        menuRef.current &&
+        e.target &&
+        !menuRef.current.contains(e.target as Node)
+      ) {
+        // Clic à l'extérieur du menu, masquer le menu ici
+        setMenuVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [menuRef]);
+
+  const handleProfileClick = () => {
+    // Afficher ou masquer le menu au clic sur l'image de profil
+    setMenuVisible(!isMenuVisible);
+  };
+
   return (
     <HeaderWrapperStyle>
-      <MenuProfileStyle>
+      <MenuProfileStyle ref={menuRef} isVisible={isMenuVisible}>
         <ul>
           <a href="#">
             <li>Mon profil</li>
@@ -120,7 +148,7 @@ export const Header = () => {
           <a href="#">
             <li>Dark mode</li>
           </a>
-          <a href="#">
+          <a href="https://developer.marvel.com/">
             <li>Site de l'API Marvel</li>
           </a>
         </ul>
@@ -158,6 +186,7 @@ export const Header = () => {
             src="https://i.ibb.co/dpWNvZk/unknown-person.jpg"
             alt="profile icon"
             className="click-trigger"
+            onClick={handleProfileClick}
           />
           Inconnu(e)
         </ProfileStyle>

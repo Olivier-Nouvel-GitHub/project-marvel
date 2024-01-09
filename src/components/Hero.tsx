@@ -8,7 +8,9 @@ const HeroStyle = styled.div`
 export const Hero = () => {
   return (
     <HeroStyle>
-      Nom : El besto comico Date : 10 juillet 2023 Héros : héro 1
+      <div>
+        <div></div>
+      </div>
     </HeroStyle>
   );
 };
