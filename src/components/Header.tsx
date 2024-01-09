@@ -1,9 +1,77 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import React, { useState, useRef, useEffect } from "react";
+
+const HeaderWrapperStyle = styled.div``;
 
 const HeaderStyle = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  background-color: #084c7c;
+  border-bottom: solid 0.05rem white;
+  border-top: solid 0.05rem white;
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  max-height: 3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+`;
+
+const MenuProfileStyle = styled.div`
+  width: 15rem;
+  border: solid 0.05rem white;
+  position: absolute;
+  right: 3rem;
+  top: 5.25rem;
+  color: white;
+
+  ul {
+     display: flex;
+     flex-direction: column;
+     list-style-type: none;
+     margin-bottom: 0rem;
+     margin-top: 0rem;
+
+  }
+  li {
+    margin-left: -2.5rem;
+    padding-left: 1rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+  }
+  a {
+  text-decoration: none;
+  color: #f8e2c9;
+  font-weight: bold;
+}
+  li:hover {
+  background-color: #084C7C; 
+`;
+
+const ProfileStyle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 2rem;
+  font-size: 18px;
+  font-weight: bold;
+  color: #f7b615;
+  img {
+    width: 3.5rem;
+    height: 3.5rem;
+    border: solid 0.05rem white;
+    padding-right: 1rem;
+    clip-path: circle(40% at 40%);
+    cursor: pointer;
+  }
+  img:hover {
+    filter: brightness(1.2);
+  }
 `;
 
 const MenuStyle = styled.nav`
@@ -11,6 +79,8 @@ const MenuStyle = styled.nav`
   font-size: 18px;
   font-weight: bold;
   display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
 
   a {
     padding-right: 1rem;
@@ -19,29 +89,49 @@ const MenuStyle = styled.nav`
 
   a:link,
   a:visited {
-    color: #162367;
+    color: #f7b615;
   }
 
   a:hover {
-    color: #70aded;
-  }
-
-  hr {
-    border: 5px solid;
+    color: #fdef16;
   }
 
   img {
-    width: 1.3rem;
-    height: 1.3rem;
-    object-fit: cover;
+    margin-right: 0.3rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .marvelIcon {
+    width: 8rem;
+    height: 3rem;
+    padding-right: 1.5rem;
   }
 `;
 
 export const Header = () => {
   return (
-    <div>
+    <HeaderWrapperStyle>
+      <MenuProfileStyle>
+        <ul>
+          <a href="#">
+            <li>Mon profil</li>
+          </a>
+          <a href="#">
+            <li>Dark mode</li>
+          </a>
+          <a href="#">
+            <li>Site de l'API Marvel</li>
+          </a>
+        </ul>
+      </MenuProfileStyle>
       <HeaderStyle>
         <MenuStyle>
+          <img
+            src="https://i.ibb.co/yYLT250/marvel.png"
+            alt="marvel icon"
+            className="marvelIcon"
+          />
           <img
             src="https://i.ibb.co/wKqKMsg/captain.png"
             alt="captain america icon"
@@ -62,8 +152,16 @@ export const Header = () => {
           />
           <Link to="/documents">Documentation</Link>
         </MenuStyle>
+        <ProfileStyle>
+          <img
+            //src="https://i.ibb.co/Rv8xpnK/stark-prof.jpg"
+            src="https://i.ibb.co/dpWNvZk/unknown-person.jpg"
+            alt="profile icon"
+            className="click-trigger"
+          />
+          Inconnu(e)
+        </ProfileStyle>
       </HeaderStyle>
-      <hr />
-    </div>
+    </HeaderWrapperStyle>
   );
 };
