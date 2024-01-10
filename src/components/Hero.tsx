@@ -27,6 +27,12 @@ const HeroCard = styled.div`
   img {
     width: 15rem;
     height: auto;
+    transform: scale(var(--img-scale));
+    transition: transform 0.3s ease;
+  }
+
+  img:hover {
+    --img-scale: 1.3;
   }
 `;
 
