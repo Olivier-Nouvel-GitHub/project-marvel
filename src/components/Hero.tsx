@@ -10,7 +10,7 @@ const SuperContainer = styled.div`
   margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
-  font-size: 20px;
+  font-size: 18px;
   border: 1px solid grey;
   padding-top: 1rem;
 `;
@@ -20,7 +20,6 @@ const Container = styled.div`
   flex-direction: column;
 
   .heroName {
-    background-color: white;
     text-align: center;
     border-left: solid black 1px;
     border-right: solid black 1px;
@@ -59,7 +58,7 @@ const HeroCard = styled.div`
   }
 
   img:hover {
-    --img-scale: 1.3;
+    --img-scale: 1.1;
   }
 `;
 
