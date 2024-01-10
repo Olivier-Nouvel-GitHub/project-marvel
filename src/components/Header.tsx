@@ -36,6 +36,7 @@ const MenuProfileStyle = styled.div<{ isVisible: boolean }>`
     list-style-type: none;
     margin-bottom: 0rem;
     margin-top: 0rem;
+    background-color: #2e8de6;
   }
   li {
     margin-left: -2.5rem;
