@@ -182,7 +182,7 @@ export const Header = () => {
             src="https://i.ibb.co/RDKRJ8v/spiderman.png"
             alt="spiderman icon"
           />
-          <Link to="/documents">Documentation</Link>
+          <Link to="/doc">Documentation</Link>
         </MenuStyle>
         <ProfileStyle>
           <img

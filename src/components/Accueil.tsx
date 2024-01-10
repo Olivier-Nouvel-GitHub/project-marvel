@@ -53,6 +53,7 @@ export const Accueil = () => {
             {" "}
             Linkedin
           </Link>
+          . Bonne visite !
         </p>
         <br />
       </Intro>
