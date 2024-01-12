@@ -27,6 +27,7 @@ export const GetHeroesList = async (): Promise<HeroesArray> => {
         limit: 20,
       },
     });
+    console.log(response.data.data.results);
     return response.data.data.results;
   } catch (error) {
     console.error("Error fetching data:", error);

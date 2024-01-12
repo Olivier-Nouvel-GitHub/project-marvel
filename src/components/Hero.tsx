@@ -33,9 +33,10 @@ const Container = styled.div`
     margin-right: 1rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    background-color: #084c7c;
-    color: #f7b615;
+    background-color: #2e8de6;
+    color: #fdef16;
     font-weight: bold;
+    border-top: 1px solid black;
   }
 `;
 
@@ -51,12 +52,15 @@ const HeroCard = styled.div`
   border-left: solid black 1px;
   border-right: solid black 1px;
   width: 15rem;
-  height: 19rem;
+  height: 14rem;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
   img {
     transform: scale(var(--img-scale));
     transition: transform 0.5s ease;
-    height: 20rem;
-    width: 20rem;
+    min-height: 15rem;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   img:hover {
