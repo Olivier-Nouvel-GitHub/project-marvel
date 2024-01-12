@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { GetHeroesList } from "../services/Api";
+import { useEffect, useState } from "react";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -13,6 +15,7 @@ const SuperContainer = styled.div`
   font-size: 18px;
   border: 1px solid grey;
   padding-top: 1rem;
+  padding-bottom: 2rem;
 `;
 
 const Container = styled.div`
@@ -63,10 +66,26 @@ const HeroCard = styled.div`
 `;
 
 export const Hero = () => {
+  const [heroesData, setHeroesData] = useState([]);
+
+  useEffect(() => {
+    const data = GetHeroesList();
+    console.log(data);
+    setHeroesData(data);
+  }, []);
+
   return (
     <SuperContainer>
       <Container>
         <HeroCard>
+          <div>
+            {Array.isArray(heroesData) ? (
+              heroesData.map((hero) => <div key={hero.id}>{hero.name}</div>)
+            ) : (
+              <p>Les données des héros ne sont pas valides.</p>
+            )}
+          </div>
+
           <div>
             <img
               src="https://i.ibb.co/zQHb94d/captainmurica.webp"
