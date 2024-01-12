@@ -69,7 +69,15 @@ const HeroCard = styled.div`
 `;
 
 export const Hero = () => {
-  const [heroesData, setHeroesData] = useState([]);
+  type Hero = {
+    id: number;
+    name: string;
+    path: string;
+    extension: string;
+    thumbnail: string;
+  };
+  type HeroesArray = Hero[];
+  const [heroesData, setHeroesData] = useState<HeroesArray>([]);
 
   useEffect(() => {
     const fetchData = async () => {

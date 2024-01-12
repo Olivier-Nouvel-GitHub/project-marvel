@@ -10,6 +10,7 @@ type Hero = {
   name: string;
   path: string;
   extension: string;
+  thumbnail: string;
 };
 type HeroesArray = Hero[];
 
