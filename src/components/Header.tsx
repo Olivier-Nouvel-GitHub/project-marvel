@@ -112,7 +112,7 @@ const MenuStyle = styled.nav`
 `;
 
 export const Header = () => {
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLDivElement | null>(null);
   const [isMenuVisible, setMenuVisible] = useState(false);
 
   useEffect(() => {

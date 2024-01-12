@@ -8,6 +8,8 @@ const privateKey = "51a6de673e976f9ba61028b4824b8c003fb2eb21";
 type Hero = {
   id: number;
   name: string;
+  path: string;
+  extension: string;
 };
 type HeroesArray = Hero[];
 
@@ -25,7 +27,6 @@ export const GetHeroesList = async (): Promise<HeroesArray> => {
         limit: 20,
       },
     });
-    console.log(response.data.data.results);
     return response.data.data.results;
   } catch (error) {
     console.error("Error fetching data:", error);

@@ -55,9 +55,8 @@ const HeroCard = styled.div`
   img {
     transform: scale(var(--img-scale));
     transition: transform 0.5s ease;
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
+    height: 20rem;
+    width: 20rem;
   }
 
   img:hover {
@@ -69,93 +68,38 @@ export const Hero = () => {
   const [heroesData, setHeroesData] = useState([]);
 
   useEffect(() => {
-    const data = GetHeroesList();
-    console.log(data);
-    setHeroesData(data);
+    const fetchData = async () => {
+      try {
+        const data = await GetHeroesList();
+        setHeroesData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <SuperContainer>
-      <Container>
-        <HeroCard>
-          <div>
-            {Array.isArray(heroesData) ? (
-              heroesData.map((hero) => <div key={hero.id}>{hero.name}</div>)
-            ) : (
-              <p>Les données des héros ne sont pas valides.</p>
-            )}
-          </div>
-
-          <div>
-            <img
-              src="https://i.ibb.co/zQHb94d/captainmurica.webp"
-              alt="captain murica"
-              className="captainmurica"
-            />
-          </div>
-        </HeroCard>
-        <div className="heroName">Captain America</div>
-      </Container>
-      <Container>
-        <HeroCard>
-          <div>
-            <img
-              src="https://i.ibb.co/zQHb94d/captainmurica.webp"
-              alt="captain murica"
-              className="captainmurica"
-            />
-          </div>
-        </HeroCard>
-        <div className="heroName">Captain America</div>
-      </Container>
-      <Container>
-        <HeroCard>
-          <div>
-            <img
-              src="https://i.ibb.co/zQHb94d/captainmurica.webp"
-              alt="captain murica"
-              className="captainmurica"
-            />
-          </div>
-        </HeroCard>
-        <div className="heroName">Captain America</div>
-      </Container>
-      <Container>
-        <HeroCard>
-          <div>
-            <img
-              src="https://i.ibb.co/zQHb94d/captainmurica.webp"
-              alt="captain murica"
-              className="captainmurica"
-            />
-          </div>
-        </HeroCard>
-        <div className="heroName">Captain America</div>
-      </Container>
-      <Container>
-        <HeroCard>
-          <div>
-            <img
-              src="https://i.ibb.co/zQHb94d/captainmurica.webp"
-              alt="captain murica"
-              className="captainmurica"
-            />
-          </div>
-        </HeroCard>
-        <div className="heroName">Captain America</div>
-      </Container>
-      <Container>
-        <HeroCard>
-          <div>
-            <img
-              src="https://i.ibb.co/zQHb94d/captainmurica.webp"
-              alt="captain murica"
-              className="captainmurica"
-            />
-          </div>
-        </HeroCard>
-        <div className="heroName">Captain America</div>
-      </Container>
+      {Array.isArray(heroesData) ? (
+        heroesData.map((hero) => (
+          <Container>
+            <HeroCard key={hero.id}>
+              <div>
+                <img
+                  src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                  alt="captain murica"
+                  className="captainmurica"
+                />
+              </div>
+            </HeroCard>
+            <div className="heroName">{hero.name}</div>
+          </Container>
+        ))
+      ) : (
+        <p>Les données des héros ne sont pas valides.</p>
+      )}
     </SuperContainer>
   );
 };
