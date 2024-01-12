@@ -72,9 +72,10 @@ export const Hero = () => {
   type Hero = {
     id: number;
     name: string;
-    path: string;
-    extension: string;
-    thumbnail: string;
+    thumbnail: {
+      path: string;
+      extension: string;
+    };
   };
   type HeroesArray = Hero[];
   const [heroesData, setHeroesData] = useState<HeroesArray>([]);
