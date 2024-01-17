@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { GetHeroesList } from "../services/Api";
 import { useEffect, useState } from "react";
+import { Loader } from "../components/Loader";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -54,6 +55,7 @@ const HeroCard = styled.div`
   width: 15rem;
   height: 14rem;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+
   img {
     transform: scale(var(--img-scale));
     transition: transform 0.5s ease;
@@ -68,8 +70,23 @@ const HeroCard = styled.div`
   }
 `;
 
+const HeroCardLoader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+  text-align: center;
+  padding-bottom: 0.3rem;
+  margin: 1rem 1rem 0rem 2.5rem;
+  border: solid black 1px;
+  width: 15rem;
+  height: 16rem;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+`;
+
 export const Hero = () => {
-  type Hero = {
+  type HeroType = {
     id: number;
     name: string;
     thumbnail: {
@@ -77,16 +94,20 @@ export const Hero = () => {
       extension: string;
     };
   };
-  type HeroesArray = Hero[];
+  type HeroesArray = HeroType[];
   const [heroesData, setHeroesData] = useState<HeroesArray>([]);
+  const [isDataLoading, setDataLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setDataLoading(true);
         const data = await GetHeroesList();
         setHeroesData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setDataLoading(false);
       }
     };
 
@@ -95,15 +116,21 @@ export const Hero = () => {
 
   return (
     <SuperContainer>
-      {Array.isArray(heroesData) ? (
+      {isDataLoading ? (
+        Array.from({ length: 20 }).map((_, index) => (
+          <HeroCardLoader key={index}>
+            <Loader />
+          </HeroCardLoader>
+        ))
+      ) : Array.isArray(heroesData) ? (
         heroesData.map((hero) => (
-          <Container>
-            <HeroCard key={hero.id}>
+          <Container key={hero.id}>
+            <HeroCard>
               <div>
                 <img
                   src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-                  alt="captain murica"
-                  className="captainmurica"
+                  alt={hero.name}
+                  className={hero.name}
                 />
               </div>
             </HeroCard>
