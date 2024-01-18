@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Hero } from "./components/Hero";
+import { HeroesList } from "./components/HeroesList";
 import { Header } from "./components/Header";
 import { Error404 } from "./components/Error404";
 import { Accueil } from "./components/Accueil";
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="accueil" element={<Accueil />} />
-          <Route path="/comics" element={<Hero />} />
+          <Route path="/comics" element={<HeroesList />} />
           <Route path="doc" element={<Doc />} />
           <Route path="*" element={<Error404 />} />
         </Routes>

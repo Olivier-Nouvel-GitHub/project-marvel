@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { GetHeroesList } from "../services/Api";
 import { useEffect, useState } from "react";
-import { Loader } from "../components/Loader";
+import { Loader } from "./Loader";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ const HeroCardLoader = styled.div`
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
 `;
 
-export const Hero = () => {
+export const HeroesList = () => {
   type HeroType = {
     id: number;
     name: string;
