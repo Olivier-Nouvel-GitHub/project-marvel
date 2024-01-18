@@ -8,6 +8,7 @@ const privateKey = "51a6de673e976f9ba61028b4824b8c003fb2eb21";
 type Hero = {
   id: number;
   name: string;
+  description: string;
   thumbnail: {
     path: string;
     extension: string;

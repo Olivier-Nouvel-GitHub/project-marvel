@@ -174,7 +174,7 @@ export const Header = () => {
             src="https://i.ibb.co/W2twRQw/deadpool.png"
             alt="deadpool icon"
           />
-          <Link to="/comics">Liste des héros</Link>
+          <Link to="/heroesList">Liste des héros</Link>
           <img src="https://i.ibb.co/tsDyJ4K/hulk.png" alt="hulk icon" />
           <Link to="/favorites">Favoris</Link>
 

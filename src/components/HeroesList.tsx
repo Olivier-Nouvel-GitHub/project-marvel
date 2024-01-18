@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { GetHeroesList } from "../services/Api";
 import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
+import { Link } from "react-router-dom";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -89,6 +90,7 @@ export const HeroesList = () => {
   type HeroType = {
     id: number;
     name: string;
+    description: string;
     thumbnail: {
       path: string;
       extension: string;
@@ -127,11 +129,15 @@ export const HeroesList = () => {
           <Container key={hero.id}>
             <HeroCard>
               <div>
-                <img
-                  src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-                  alt={hero.name}
-                  className={hero.name}
-                />
+                <Link
+                  to={`/hero/${hero.id}/${hero.name}/${hero.thumbnail.path}/${hero.thumbnail.extension}${hero.description}`}
+                >
+                  <img
+                    src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                    alt={hero.name}
+                    className={hero.name}
+                  />
+                </Link>
               </div>
             </HeroCard>
             <div className="heroName">{hero.name}</div>
