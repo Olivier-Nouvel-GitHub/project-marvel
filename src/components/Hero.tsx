@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { RootState } from "../redux/rootReducer";
+import { useSelector } from "react-redux";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -18,12 +19,20 @@ const SuperContainer = styled.div`
 `;
 
 export const Hero = () => {
-  const { idHero, nameHero } = useParams();
-  return (
-    <div>
-      <SuperContainer>
-        id: {idHero} nom : {nameHero}
-      </SuperContainer>
-    </div>
+  const currentHero = useSelector(
+    (state: RootState) => state.heroes.selectedHero
   );
+  if (!currentHero) {
+    return <div>Aucun héros sélectionné</div>;
+  }
+
+  {
+    return (
+      <div>
+        <SuperContainer>
+          id: {currentHero.id} nom : {currentHero.name}
+        </SuperContainer>
+      </div>
+    );
+  }
 };

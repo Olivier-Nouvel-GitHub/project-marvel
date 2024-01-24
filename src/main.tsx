@@ -8,6 +8,8 @@ import { Error404 } from "./components/Error404";
 import { Accueil } from "./components/Accueil";
 import { Doc } from "./components/Doc";
 import styled from "styled-components";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 import "./main.css";
 
 const AppStyle = styled.div`
@@ -17,21 +19,20 @@ const AppStyle = styled.div`
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AppStyle>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Accueil />} />
-          <Route path="/accueil" element={<Accueil />} />
-          <Route path="/heroesList" element={<HeroesList />} />
-          <Route
-            path="/hero/:idHero/:nameHero/:pathHero/:extensionHero"
-            element={<Hero />}
-          />
-          <Route path="/doc" element={<Doc />} />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
-      </Router>
-    </AppStyle>
+    <Provider store={store}>
+      <AppStyle>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Accueil />} />
+            <Route path="/accueil" element={<Accueil />} />
+            <Route path="/heroesList" element={<HeroesList />} />
+            <Route path="/hero" element={<Hero />} />
+            <Route path="/doc" element={<Doc />} />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        </Router>
+      </AppStyle>
+    </Provider>
   </React.StrictMode>
 );

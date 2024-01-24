@@ -38,12 +38,9 @@ export const Accueil = () => {
           mes compétences en développement.
         </p>
         <p>
-          Ce site est à destination des recruteur/euses et toute personne ayant
-          des compétences en développement souhaitant juger de ce que je sais
-          faire. Il est réalisé en <b>React</b> pour le moment et a pour but de
-          consommer l'<b>API</b> du site marvel, d'afficher des héros de comics
-          et de proposer un profil permettant d'avoir des favoris, un dark mode
-          etc.
+          Il utilise l'<b>API</b> du site marvel afin d'afficher des héros de
+          comics et de proposer un profil permettant d'avoir des favoris, un
+          dark mode etc.
         </p>
         <p>
           Vous en apprendrez plus dans la section{" "}

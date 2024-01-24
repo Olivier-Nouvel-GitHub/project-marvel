@@ -3,6 +3,9 @@ import { GetHeroesList } from "../services/Api";
 import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setHeroes } from "../redux/heroesSlice";
+import { HeroType } from "../types/heroTypes";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -87,18 +90,15 @@ const HeroCardLoader = styled.div`
 `;
 
 export const HeroesList = () => {
-  type HeroType = {
-    id: number;
-    name: string;
-    description: string;
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-  };
+  const dispatch = useDispatch();
+
   type HeroesArray = HeroType[];
   const [heroesData, setHeroesData] = useState<HeroesArray>([]);
   const [isDataLoading, setDataLoading] = useState(false);
+
+  const heroSelected = (hero: HeroType) => {
+    dispatch(setHeroes(hero));
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,7 +114,7 @@ export const HeroesList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [dispatch]);
 
   return (
     <SuperContainer>
@@ -129,9 +129,7 @@ export const HeroesList = () => {
           <Container key={hero.id}>
             <HeroCard>
               <div>
-                <Link
-                  to={`/hero/${hero.id}/${hero.name}/${hero.thumbnail.path}/${hero.thumbnail.extension}${hero.description}`}
-                >
+                <Link to={`/hero`} onClick={() => heroSelected(hero)}>
                   <img
                     src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
                     alt={hero.name}
