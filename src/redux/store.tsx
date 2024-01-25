@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import heroesReducer from "./heroesSlice";
+import rootReducer from "./rootReducer";
 
 const store = configureStore({
-  reducer: {
-    heroes: heroesReducer,
-  },
+  reducer: rootReducer,
 });
 
 export default store;
