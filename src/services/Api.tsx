@@ -1,20 +1,12 @@
 import axios from "axios";
 import md5 from "md5";
+import { HeroType } from "../types/heroTypes";
 
 const BASE_URL = "https://gateway.marvel.com/";
 const publicKey = "81cfb00bcab273da1a435081f267f362";
 const privateKey = "51a6de673e976f9ba61028b4824b8c003fb2eb21";
 
-type Hero = {
-  id: number;
-  name: string;
-  description: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-};
-type HeroesArray = Hero[];
+type HeroesArray = HeroType[];
 
 export const GetHeroesList = async (): Promise<HeroesArray> => {
   const ts = Date.now().toString();
