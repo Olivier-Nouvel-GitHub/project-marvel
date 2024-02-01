@@ -3,6 +3,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
+import { createNewUser } from "../services/firebase/firebase.create.user";
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +32,7 @@ const LoginBox = styled.div`
   align-items: center;
 `;
 
-const Form = styled.form`
+const StyledForm = styled.form`
   width: 100%;
 `;
 
@@ -72,6 +74,7 @@ const Button = styled.button`
 `;
 
 export const Register = () => {
+  const [errorMessage, setErrorMessage] = useState();
   const SigninSchema = Yup.object().shape({
     email: Yup.string().email("Email invalide").required("Obligatoire"),
 
@@ -79,20 +82,51 @@ export const Register = () => {
   });
   return (
     <Container>
-      <LoginBox>
-        <Form action="/submit-your-login-form" method="post">
-          <Title>Créer un compte</Title>
-          <InputGroup>
-            <Label htmlFor="username">Adresse mail</Label>
-            <Input type="text" id="username" name="username" required />
-          </InputGroup>
-          <InputGroup>
-            <Label htmlFor="password">Mot de passe</Label>
-            <Input type="password" id="password" name="password" required />
-          </InputGroup>
-          <Button type="submit">Envoyer</Button>
-        </Form>
-      </LoginBox>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={SigninSchema}
+        onSubmit={async (values) => {
+          try {
+            createNewUser();
+          } catch (error) {
+            setErrorMessage("Identifiants invalides");
+          }
+        }}
+      >
+        <LoginBox>
+          <StyledForm>
+            <div className="error">{errorMessage}</div> <br />
+            <Title>Créer un compte</Title>
+            <InputGroup>
+              <Input>
+                <Label htmlFor={email}>Adresse mail</Label>
+                <Field name="email" type="text" className="email-input" />
+                <br />
+                <ErrorMessage name="email" component="div" className="error" />
+                <br />
+              </Input>
+            </InputGroup>
+            <InputGroup>
+              <Input>
+                <Label htmlFor={password}>Adresse mail</Label>
+                <Field
+                  name="password"
+                  type="password"
+                  className="authent-input"
+                />
+                <br />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="error"
+                />
+                <br />
+              </Input>
+            </InputGroup>
+            <Button type="submit">Envoyer</Button>
+          </StyledForm>
+        </LoginBox>
+      </Formik>
     </Container>
   );
 };
