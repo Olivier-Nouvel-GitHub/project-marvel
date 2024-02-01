@@ -143,6 +143,10 @@ export const Header = () => {
     <HeaderWrapperStyle>
       <MenuProfileStyle ref={menuRef} isVisible={isMenuVisible}>
         <ul>
+          <Link to="/register">
+            <li>Créer un compte</li>
+          </Link>
+
           <a href="#">
             <li>Mon profil</li>
           </a>

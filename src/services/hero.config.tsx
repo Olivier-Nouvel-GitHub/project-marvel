@@ -1,7 +1,7 @@
 import axios from "axios";
 import md5 from "md5";
 import { HeroType } from "../types/heroTypes";
-import { BASE_URL, publicKey, privateKey } from "./api.config";
+import { baseUrl, publicKey, privateKey } from "./api.config";
 
 type HeroesArray = HeroType[];
 
@@ -10,7 +10,7 @@ export const GetHeroesList = async (): Promise<HeroesArray> => {
   const hash = md5(ts + privateKey + publicKey).toString();
 
   try {
-    const response = await axios.get(`${BASE_URL}/v1/public/characters`, {
+    const response = await axios.get(`${baseUrl}/v1/public/characters`, {
       params: {
         apikey: publicKey,
         ts: ts,

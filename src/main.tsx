@@ -7,6 +7,7 @@ import { Header } from "./components/Header";
 import { Error404 } from "./components/Error404";
 import { Accueil } from "./components/Accueil";
 import { Doc } from "./components/Doc";
+import { Register } from "./components/Register";
 import styled from "styled-components";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <Header />
           <Routes>
             <Route path="/" element={<Accueil />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/accueil" element={<Accueil />} />
             <Route path="/heroesList" element={<HeroesList />} />
             <Route path="/hero" element={<Hero />} />

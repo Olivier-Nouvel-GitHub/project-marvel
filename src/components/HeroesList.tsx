@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { GetHeroesList } from "../services/Api";
+import { GetHeroesList } from "../services/hero.config";
 import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 import { Link } from "react-router-dom";

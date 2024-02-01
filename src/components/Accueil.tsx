@@ -13,6 +13,7 @@ const AccueilStyle = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
 `;
+
 const Intro = styled.div`
   color: #084c7c;
   font-size: 1.3rem;
