@@ -2,21 +2,10 @@ import { auth } from "../../firebase/firebase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 
-interface UserProfile {
-  avatar: string;
-  favoriteHeroes: {
-    hero1: number;
-    hero2: number;
-    hero3: number;
-    hero4: number;
-    hero5: number;
-  };
-}
-
 export const createNewUser = async (
   email: string,
   password: string,
-  userProfile: UserProfile
+  avatar: string
 ) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(
@@ -29,7 +18,7 @@ export const createNewUser = async (
     console.log("Nouvel utilisateur créé avec UID :", user.uid);
 
     // On sauvegarde les détails du profil utilisateur dans la BDD
-    await saveUserDetailsToDatabase(user.uid, userProfile);
+    await saveUserDetailsToDatabase(user.uid, avatar);
 
     return user;
   } catch (error) {
@@ -40,14 +29,14 @@ export const createNewUser = async (
 
 export const saveUserDetailsToDatabase = async (
   userId: string,
-  profile: UserProfile
+  avatar: string
 ) => {
   const db = getDatabase();
   const userRef = ref(db, "users/" + userId);
 
   try {
     // On enregistre les détails supp du profil dans la BDD
-    await set(userRef, profile);
+    await set(userRef, avatar);
     console.log(
       "Détails du profil enregistrés avec succès dans la base de données."
     );

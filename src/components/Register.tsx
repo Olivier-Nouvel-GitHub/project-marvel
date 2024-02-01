@@ -1,5 +1,3 @@
-import { auth } from "../firebase/firebase.config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -11,29 +9,32 @@ const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  background-color: #9cd1d5;
   width: 80%;
   margin-top: 2rem;
   margin-left: auto;
   margin-right: auto;
   font-size: 18px;
-  border: 1px solid grey;
   padding-top: 1rem;
   padding-bottom: 2rem;
 `;
 
+const LabelChoseAvatar = styled.label`
+  display: block;
+  text-align: center;
+`;
+
+const StyledForm = styled(Form)`
+  margin-top: -3rem;
+`;
+
 const LoginBox = styled.div`
-  background-color: white;
+  background-color: #9cd1d5;
   padding: 3rem;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const StyledForm = styled.form`
-  width: 100%;
 `;
 
 const Title = styled.h2`
@@ -47,15 +48,46 @@ const InputGroup = styled.div`
 `;
 
 const Label = styled.label`
+  width: 14rem;
+  padding-top: 1rem;
   display: block;
   margin-bottom: 5px;
 `;
 
-const Input = styled.input`
+const InputComponent = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
   width: 90%;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid #084c7c;
   border-radius: 4px;
+
+  padding-top: 0.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+
+  .email-input {
+    width: 14rem;
+    padding: 0.4rem;
+    border: solid 1px;
+    border-radius: 4px;
+  }
+
+  .password-input {
+    width: 14rem;
+    padding: 0.4rem;
+    border: solid 1px;
+    border-radius: 4px;
+  }
+
+  .error {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #8b0000;
+    width: 14rem;
+    text-align: center;
+  }
 `;
 
 const Button = styled.button`
@@ -73,21 +105,43 @@ const Button = styled.button`
   }
 `;
 
-export const Register = () => {
-  const [errorMessage, setErrorMessage] = useState();
-  const SigninSchema = Yup.object().shape({
-    email: Yup.string().email("Email invalide").required("Obligatoire"),
+const Avatars = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.5rem;
 
-    password: Yup.string().required("Veuillez renseigner un mot de passe"),
+  img {
+    width: 3.5rem;
+    height: 3.5rem;
+    padding-right: 1rem;
+    clip-path: circle(40% at 40%);
+    cursor: pointer;
+  }
+`;
+
+export const Register = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const SigninSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Email invalide")
+      .required("L'email est obligatoire"),
+
+    password: Yup.string()
+      .required("Veuillez renseigner un mot de passe")
+      .min(5, "Le mot de passe doit avoir au moins 5 caractères"),
+
+    avatar: Yup.string().required("Veuillez choisir un avatar"),
   });
   return (
     <Container>
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "", password: "", avatar: "" }}
         validationSchema={SigninSchema}
         onSubmit={async (values) => {
           try {
-            createNewUser();
+            createNewUser(values.email, values.password, values.avatar);
           } catch (error) {
             setErrorMessage("Identifiants invalides");
           }
@@ -98,21 +152,21 @@ export const Register = () => {
             <div className="error">{errorMessage}</div> <br />
             <Title>Créer un compte</Title>
             <InputGroup>
-              <Input>
-                <Label htmlFor={email}>Adresse mail</Label>
+              <InputComponent>
+                <Label htmlFor="email">Adresse mail</Label>
                 <Field name="email" type="text" className="email-input" />
                 <br />
                 <ErrorMessage name="email" component="div" className="error" />
                 <br />
-              </Input>
+              </InputComponent>
             </InputGroup>
             <InputGroup>
-              <Input>
-                <Label htmlFor={password}>Adresse mail</Label>
+              <InputComponent>
+                <Label htmlFor="password">Mot de passe</Label>
                 <Field
                   name="password"
                   type="password"
-                  className="authent-input"
+                  className="password-input"
                 />
                 <br />
                 <ErrorMessage
@@ -121,7 +175,57 @@ export const Register = () => {
                   className="error"
                 />
                 <br />
-              </Input>
+              </InputComponent>
+              <LabelChoseAvatar>Choisissez un avatar :</LabelChoseAvatar>
+              <Avatars>
+                <Field
+                  type="radio"
+                  name="avatar"
+                  value="https://i.ibb.co/hmVRMx5/blackwidow.png"
+                  id="avatar-blackwidow"
+                />
+                <label htmlFor="avatar-blackwidow">
+                  <img
+                    src="https://i.ibb.co/hmVRMx5/blackwidow.png"
+                    alt="Black Widow"
+                  />
+                </label>
+
+                <Field
+                  type="radio"
+                  name="avatar"
+                  value="https://i.ibb.co/9bcFq2L/ironman.png"
+                  id="avatar-ironman"
+                />
+                <label htmlFor="avatar-ironman">
+                  <img
+                    src="https://i.ibb.co/9bcFq2L/ironman.png"
+                    alt="Iron Man"
+                  />
+                </label>
+
+                <Field
+                  type="radio"
+                  name="avatar"
+                  value="https://i.ibb.co/YWpSbkp/mask.png"
+                  id="avatar-mask"
+                />
+                <label htmlFor="avatar-mask">
+                  <img src="https://i.ibb.co/YWpSbkp/mask.png" alt="Mask" />
+                </label>
+                <Field
+                  type="radio"
+                  name="avatar"
+                  value="https://i.ibb.co/4fwPJJ2/spiderman.png"
+                  id="avatar-spiderman"
+                />
+                <label htmlFor="avatar-spiderman">
+                  <img
+                    src="https://i.ibb.co/4fwPJJ2/spiderman.png"
+                    alt="Spider man"
+                  />
+                </label>
+              </Avatars>
             </InputGroup>
             <Button type="submit">Envoyer</Button>
           </StyledForm>
@@ -130,15 +234,3 @@ export const Register = () => {
     </Container>
   );
 };
-
-const email = "test@test.test";
-const password = "testtest";
-
-createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    const user = userCredential.user;
-    console.log("Nouvel utilisateur créé avec UID :", user.uid);
-  })
-  .catch((error) => {
-    console.error("Erreur lors de la création de l'utilisateur :", error);
-  });

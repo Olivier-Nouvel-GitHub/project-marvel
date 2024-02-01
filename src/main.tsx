@@ -12,6 +12,7 @@ import styled from "styled-components";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import "./main.css";
+import "firebase/database";
 
 const AppStyle = styled.div`
   padding-top: 0.7rem;
