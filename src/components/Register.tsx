@@ -1,6 +1,8 @@
 import { auth } from "../firebase/firebase.config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import styled from "styled-components";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
 
 const Container = styled.div`
   display: flex;
@@ -70,6 +72,11 @@ const Button = styled.button`
 `;
 
 export const Register = () => {
+  const SigninSchema = Yup.object().shape({
+    email: Yup.string().email("Email invalide").required("Obligatoire"),
+
+    password: Yup.string().required("Veuillez renseigner un mot de passe"),
+  });
   return (
     <Container>
       <LoginBox>

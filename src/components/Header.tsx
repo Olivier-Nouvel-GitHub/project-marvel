@@ -114,6 +114,9 @@ const MenuStyle = styled.nav`
 export const Header = () => {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [isMenuVisible, setMenuVisible] = useState(false);
+  const closeMenu = () => {
+    setMenuVisible(false);
+  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -122,7 +125,6 @@ export const Header = () => {
         e.target &&
         !menuRef.current.contains(e.target as Node)
       ) {
-        // Clic à l'extérieur du menu, masquer le menu ici
         setMenuVisible(false);
       }
     };
@@ -134,8 +136,8 @@ export const Header = () => {
     };
   }, [menuRef]);
 
-  const handleProfileClick = () => {
-    // Afficher ou masquer le menu au clic sur l'image de profil
+  const handleProfileClick = (e: React.MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
     setMenuVisible(!isMenuVisible);
   };
 
@@ -143,7 +145,7 @@ export const Header = () => {
     <HeaderWrapperStyle>
       <MenuProfileStyle ref={menuRef} isVisible={isMenuVisible}>
         <ul>
-          <Link to="/register">
+          <Link to="/register" onClick={closeMenu}>
             <li>Créer un compte</li>
           </Link>
 
@@ -194,7 +196,7 @@ export const Header = () => {
             src="https://i.ibb.co/dpWNvZk/unknown-person.jpg"
             alt="profile icon"
             className="click-trigger"
-            onClick={handleProfileClick}
+            onClick={(e) => handleProfileClick(e)}
           />
           Inconnu(e)
         </ProfileStyle>
