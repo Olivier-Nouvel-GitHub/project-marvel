@@ -16,6 +16,14 @@ const Container = styled.div`
   font-size: 18px;
   padding-top: 1rem;
   padding-bottom: 2rem;
+
+  .error {
+    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #8b0000;
+    width: 100%;
+    text-align: center;
+  }
 `;
 
 const LabelChoseAvatar = styled.label`
@@ -42,8 +50,16 @@ const Title = styled.h2`
   text-align: center;
 `;
 
+const InputField = styled.div`
+  padding-bottom: 1rem;
+  border: 1px solid #084c7c;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+`;
+
 const InputGroup = styled.div`
-  margin-bottom: 15px;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
 `;
 
@@ -51,7 +67,7 @@ const Label = styled.label`
   width: 14rem;
   padding-top: 1rem;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
 `;
 
 const InputComponent = styled.div`
@@ -60,11 +76,8 @@ const InputComponent = styled.div`
   flex-wrap: wrap;
   align-items: center;
   width: 90%;
-  border: 1px solid #084c7c;
-  border-radius: 4px;
 
   padding-top: 0.5rem;
-  padding-bottom: 1.5rem;
   margin-bottom: 1rem;
 
   .email-input {
@@ -79,14 +92,6 @@ const InputComponent = styled.div`
     padding: 0.4rem;
     border: solid 1px;
     border-radius: 4px;
-  }
-
-  .error {
-    margin-top: 0.5rem;
-    font-weight: bold;
-    color: #8b0000;
-    width: 14rem;
-    text-align: center;
   }
 `;
 
@@ -151,31 +156,39 @@ export const Register = () => {
           <StyledForm>
             <div className="error">{errorMessage}</div> <br />
             <Title>Créer un compte</Title>
+            <InputField>
+              <InputGroup>
+                <InputComponent>
+                  <Label htmlFor="email">Adresse mail</Label>
+                  <Field name="email" type="text" className="email-input" />
+                  <br />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="error"
+                  />
+                  <br />
+                </InputComponent>
+              </InputGroup>
+              <InputGroup>
+                <InputComponent>
+                  <Label htmlFor="password">Mot de passe</Label>
+                  <Field
+                    name="password"
+                    type="password"
+                    className="password-input"
+                  />
+                  <br />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="error"
+                  />
+                  <br />
+                </InputComponent>
+              </InputGroup>
+            </InputField>
             <InputGroup>
-              <InputComponent>
-                <Label htmlFor="email">Adresse mail</Label>
-                <Field name="email" type="text" className="email-input" />
-                <br />
-                <ErrorMessage name="email" component="div" className="error" />
-                <br />
-              </InputComponent>
-            </InputGroup>
-            <InputGroup>
-              <InputComponent>
-                <Label htmlFor="password">Mot de passe</Label>
-                <Field
-                  name="password"
-                  type="password"
-                  className="password-input"
-                />
-                <br />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="error"
-                />
-                <br />
-              </InputComponent>
               <LabelChoseAvatar>Choisissez un avatar :</LabelChoseAvatar>
               <Avatars>
                 <Field
@@ -226,6 +239,7 @@ export const Register = () => {
                   />
                 </label>
               </Avatars>
+              <ErrorMessage name="avatar" component="div" className="error" />
             </InputGroup>
             <Button type="submit">Envoyer</Button>
           </StyledForm>
