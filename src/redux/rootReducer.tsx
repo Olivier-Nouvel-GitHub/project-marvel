@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import heroesReducer from "./heroesSlice";
+import heroesReducer from "./slices/heroesSlice";
 
 // Définir l'état global en combinant les reducers
 const rootReducer = combineReducers({

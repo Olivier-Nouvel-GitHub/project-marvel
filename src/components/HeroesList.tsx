@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { GetHeroesList } from "../services/hero.config";
+import { GetHeroesList } from "../services/hero.service";
 import { useEffect, useState } from "react";
 import { Loader } from "./Loader";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setHeroes } from "../redux/heroesSlice";
-import { HeroType } from "../types/heroTypes";
+import { setHeroes } from "../redux/slices/heroesSlice";
+import { HeroType } from "../types/heroType";
 
 const SuperContainer = styled.div`
   display: flex;

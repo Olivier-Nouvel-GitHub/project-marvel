@@ -1,5 +1,9 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { auth } from "../firebase/firebase.config";
+import { Authent } from "../components/authent";
+import { Register } from "../components/Register";
+import { UserType } from "../types/UserType";
 
 const AccueilStyle = styled.div`
   display: flex;
@@ -31,30 +35,18 @@ const Intro = styled.div`
 `;
 
 export const Accueil = () => {
-  return (
-    <AccueilStyle>
-      <Intro>
-        <p>
-          Bonjour et bienvenue sur cette application qui a pour but de démontrer
-          mes compétences en développement.
-        </p>
-        <p>
-          Il utilise l'<b>API</b> du site marvel afin d'afficher des héros de
-          comics et de proposer un profil permettant d'avoir des favoris, un
-          dark mode etc.
-        </p>
-        <p>
-          Vous en apprendrez plus dans la section{" "}
-          <Link to="/doc">Documentation</Link> concernant la réalisation
-          technique et vous pouvez me joindre sur
-          <Link to="https://www.linkedin.com/in/olivier-nouvel-936b96b1/">
-            {" "}
-            Linkedin
-          </Link>
-          . Bonne visite !
-        </p>
-        <br />
-      </Intro>
-    </AccueilStyle>
-  );
+  const [user, setUser] = useState<UserType | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      //  setUser(authUser);
+      console.log(authUser);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  return <div>{user ? <Register /> : <div>bienvenue</div>}</div>;
 };
