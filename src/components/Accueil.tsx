@@ -48,5 +48,15 @@ export const Accueil = () => {
     };
   }, []);
 
-  return <div>{user ? <Register /> : <div>bienvenue</div>}</div>;
+  return (
+    <div>
+      {user ? (
+        <div>Bienvenue</div>
+      ) : (
+        <div>
+          <Authent />
+        </div>
+      )}
+    </div>
+  );
 };

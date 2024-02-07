@@ -54,6 +54,7 @@ const InputField = styled.div`
   border: 1px solid #084c7c;
   border-radius: 4px;
   margin-bottom: 2rem;
+  margin-right: 1rem;
 `;
 
 const InputGroup = styled.div`
@@ -146,7 +147,7 @@ export const Authent = () => {
         <LoginBox>
           <StyledForm>
             <div className="error">{errorMessage}</div> <br />
-            <Title>Créer un compte</Title>
+            <Title>Connexion</Title>
             <InputField>
               <InputGroup>
                 <InputComponent>
