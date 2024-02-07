@@ -1,23 +1,8 @@
-import { useEffect, useState } from "react";
-import { auth } from "../firebase/firebase.config";
+import { useAuthStatus } from "../hooks/use.auth.status";
 import { Authent } from "../components/authent";
 
 export const Accueil = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setIsAuthenticated(true);
-      } else {
-        setIsAuthenticated(false);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const isAuthenticated = useAuthStatus();
 
   return (
     <div>
