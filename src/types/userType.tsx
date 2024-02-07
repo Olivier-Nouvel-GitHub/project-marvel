@@ -1,7 +1,7 @@
 import { HeroType } from "./heroType";
 
 export type UserType = {
-  email: string;
+  email: string | null;
   avatar: string;
   fav: {
     hero1: HeroType;

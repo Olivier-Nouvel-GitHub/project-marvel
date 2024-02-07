@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { setAuthenticatedUser } from "../redux/slices/userSlice";
 import { UserType } from "../types/UserType";
 import { useDispatch } from "react-redux";
+import { fetchUserDetails } from "../services/firebase/fetch.user.details";
 
 const Container = styled.div`
   display: flex;
@@ -137,8 +138,14 @@ export const Authent = () => {
               values.email,
               values.password
             );
-            const user = userCredential.user;
-            console.log(user);
+            const firebaseUser = userCredential.user;
+            const userDetails = await fetchUserDetails(firebaseUser.uid);
+            const user: UserType = {
+              email: firebaseUser.email,
+              avatar: userDetails.avatar,
+              fav: userDetails.fav,
+            };
+            userAuthenticated(user);
           } catch (error) {
             setErrorMessage("Identifiants invalides");
           }
