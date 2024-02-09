@@ -11,10 +11,9 @@ import { Authent } from "./components/Authent";
 import { Register } from "./components/Register";
 import styled from "styled-components";
 import store from "./redux/store";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import "./main.css";
 import "firebase/database";
-import { RootState } from "./redux/rootReducer";
 
 const AppStyle = styled.div`
   padding-top: 0.7rem;
@@ -25,27 +24,44 @@ const container = document.getElementById("root");
 if (!container) throw new Error("Failed to find the root element");
 const root = createRoot(container);
 
-const authenticatedUser = useSelector(
-  (state: RootState) => state.user.authenticatedUser
-);
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <AppStyle>
-        <ProtectedRoutes>
-          <Router>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Authent />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/heroesList" element={<HeroesList />} />
-              <Route path="/hero" element={<Hero />} />
-              <Route path="/doc" element={<Doc />} />
-              <Route path="*" element={<Error404 />} />
-            </Routes>
-          </Router>
-        </ProtectedRoutes>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Authent />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/heroesList"
+              element={
+                <ProtectedRoutes>
+                  <Header />
+                  <HeroesList />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/hero"
+              element={
+                <ProtectedRoutes>
+                  <Header />
+                  <Hero />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/doc"
+              element={
+                <ProtectedRoutes>
+                  <Header />
+                  <Doc />
+                </ProtectedRoutes>
+              }
+            />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        </Router>
       </AppStyle>
     </Provider>
   </React.StrictMode>
