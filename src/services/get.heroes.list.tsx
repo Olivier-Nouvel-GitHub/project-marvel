@@ -1,7 +1,7 @@
 import axios from "axios";
 import md5 from "md5";
 import { HeroType } from "../types/heroType";
-import { baseUrl, publicKey, privateKey } from "./api.config";
+import { baseUrl, publicKey, privateKey } from "../config/api.config";
 
 type HeroesArray = HeroType[];
 
@@ -19,7 +19,6 @@ export const GetHeroesList = async (): Promise<HeroesArray> => {
         limit: 20,
       },
     });
-    console.log(response.data.data.results);
     return response.data.data.results;
   } catch (error) {
     console.error("Error fetching data:", error);

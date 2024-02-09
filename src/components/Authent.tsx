@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { auth } from "../firebase/firebase.config";
+import { auth } from "../config/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { setAuthenticatedUser } from "../redux/slices/userSlice";
 import { UserType } from "../types/UserType";
