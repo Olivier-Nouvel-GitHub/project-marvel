@@ -55,7 +55,7 @@ const InputField = styled.div`
   border: 1px solid #084c7c;
   border-radius: 4px;
   margin-bottom: 2rem;
-  margin-right: 1rem;
+  padding-right: 1rem;
 `;
 
 const InputGroup = styled.div`
@@ -146,6 +146,7 @@ export const Authent = () => {
               fav: userDetails.fav,
             };
             userAuthenticated(user);
+            console.log(user);
           } catch (error) {
             setErrorMessage("Identifiants invalides");
           }
