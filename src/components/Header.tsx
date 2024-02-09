@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
+import { RootState } from "../redux/rootReducer";
+import { useSelector } from "react-redux";
 
 const HeaderWrapperStyle = styled.div``;
 

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
-import { createNewUser } from "../services/firebase/firebase.create.user";
+import { createNewUser } from "../services/firebase/create.user";
 
 const Container = styled.div`
   display: flex;
