@@ -3,6 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { createNewUser } from "../services/firebase/create.user";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -23,6 +24,10 @@ const Container = styled.div`
     color: #8b0000;
     width: 100%;
     text-align: center;
+  }
+
+  .authentAccountLink {
+    margin-top: 1rem;
   }
 `;
 
@@ -132,6 +137,12 @@ const Avatars = styled.div`
 
     cursor: pointer;
   }
+`;
+const BottomLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
 `;
 
 export const Register = () => {
@@ -265,6 +276,11 @@ export const Register = () => {
             </InputGroup>
             <Button type="submit">Envoyer</Button>
           </StyledForm>
+          <BottomLinks>
+            <Link to="/" className="authentAccountLink">
+              S'identifier
+            </Link>
+          </BottomLinks>
         </LoginBox>
       </Formik>
     </Container>

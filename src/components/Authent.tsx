@@ -8,7 +8,7 @@ import { setAuthenticatedUser } from "../redux/slices/userSlice";
 import { UserType } from "../types/UserType";
 import { useDispatch } from "react-redux";
 import { fetchUserDetails } from "../services/firebase/fetch.user.details";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -29,6 +29,10 @@ const Container = styled.div`
     color: #8b0000;
     width: 100%;
     text-align: center;
+  }
+
+  .createAccountLink {
+    margin-top: 1rem;
   }
 `;
 
@@ -110,6 +114,13 @@ const Button = styled.button`
   &:hover {
     background-color: #4cae4c;
   }
+`;
+
+const BottomLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
 `;
 
 export const Authent = () => {
@@ -196,6 +207,11 @@ export const Authent = () => {
             </InputGroup>
             <Button type="submit">Envoyer</Button>
           </StyledForm>
+          <BottomLinks>
+            <Link to="/register" className="createAccountLink">
+              Créer un compte
+            </Link>
+          </BottomLinks>
         </LoginBox>
       </Formik>
     </Container>
