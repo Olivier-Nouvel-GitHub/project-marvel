@@ -132,9 +132,6 @@ export const Header = () => {
 
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [isMenuVisible, setMenuVisible] = useState(false);
-  const closeMenu = () => {
-    setMenuVisible(false);
-  };
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -163,15 +160,8 @@ export const Header = () => {
     <HeaderWrapperStyle>
       <MenuProfileStyle ref={menuRef} isVisible={isMenuVisible}>
         <ul>
-          <Link to="/register" onClick={closeMenu}>
-            <li>Créer un compte</li>
-          </Link>
-
           <a href="#">
             <li>Mon profil</li>
-          </a>
-          <a href="#">
-            <li>Dark mode</li>
           </a>
           <a href="#" onClick={(e) => handleSignOut(e, navigate)}>
             <li>Se déconnecter</li>
