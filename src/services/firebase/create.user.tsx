@@ -36,7 +36,7 @@ export const saveUserDetailsToDatabase = async (
 
   try {
     // On enregistre les détails supp du profil dans la BDD
-    await set(userRef, avatar);
+    await set(userRef, { avatar });
     console.log(
       "Détails du profil enregistrés avec succès dans la base de données."
     );

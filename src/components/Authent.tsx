@@ -8,6 +8,7 @@ import { setAuthenticatedUser } from "../redux/slices/userSlice";
 import { UserType } from "../types/UserType";
 import { useDispatch } from "react-redux";
 import { fetchUserDetails } from "../services/firebase/fetch.user.details";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -112,6 +113,7 @@ const Button = styled.button`
 `;
 
 export const Authent = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
   const SigninSchema = Yup.object().shape({
@@ -146,9 +148,10 @@ export const Authent = () => {
               fav: userDetails.fav,
             };
             userAuthenticated(user);
-            console.log(user);
+            console.log("info user :", user);
+            navigate("/heroesList");
           } catch (error) {
-            setErrorMessage("Identifiants invalides");
+            setErrorMessage("Erreur : Identifiants invalides");
           }
         }}
       >

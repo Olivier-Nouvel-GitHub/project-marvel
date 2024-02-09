@@ -10,6 +10,8 @@ const firebaseConfig = {
   messagingSenderId: "438702269875",
   appId: "1:438702269875:web:86d54b07d493ca6484d7c6",
   measurementId: "G-MPCDCETK35",
+  databaseURL:
+    "https://marvel-bb542-default-rtdb.europe-west1.firebasedatabase.app",
 };
 
 const app = initializeApp(firebaseConfig);

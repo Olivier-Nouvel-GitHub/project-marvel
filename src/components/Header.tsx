@@ -70,12 +70,21 @@ const ProfileStyle = styled.div`
     height: 3.5rem;
     border: solid 0.05rem white;
     padding-right: 1rem;
-    clip-path: circle(40% at 40%);
     cursor: pointer;
   }
   img:hover {
     filter: brightness(1.2);
   }
+`;
+
+const ProfileAvatarContainer = styled.div`
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 0.2rem solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  margin-right: 1rem;
 `;
 
 const MenuStyle = styled.nav`
@@ -114,6 +123,10 @@ const MenuStyle = styled.nav`
 `;
 
 export const Header = () => {
+  const currentUser = useSelector(
+    (state: RootState) => state.user.authenticatedUser
+  );
+
   const menuRef = useRef<HTMLDivElement | null>(null);
   const [isMenuVisible, setMenuVisible] = useState(false);
   const closeMenu = () => {
@@ -174,12 +187,6 @@ export const Header = () => {
             className="marvelIcon"
           />
           <img
-            src="https://i.ibb.co/wKqKMsg/captain.png"
-            alt="captain america icon"
-          />
-          <Link to="/">Accueil</Link>
-
-          <img
             src="https://i.ibb.co/W2twRQw/deadpool.png"
             alt="deadpool icon"
           />
@@ -194,14 +201,15 @@ export const Header = () => {
           <Link to="/doc">Documentation</Link>
         </MenuStyle>
         <ProfileStyle>
-          <img
-            //src="https://i.ibb.co/Rv8xpnK/stark-prof.jpg"
-            src="https://i.ibb.co/dpWNvZk/unknown-person.jpg"
-            alt="profile icon"
-            className="click-trigger"
-            onClick={(e) => handleProfileClick(e)}
-          />
-          Inconnu(e)
+          <ProfileAvatarContainer>
+            <img
+              src={currentUser?.avatar}
+              alt="profile icon"
+              className="click-trigger"
+              onClick={(e) => handleProfileClick(e)}
+            />
+          </ProfileAvatarContainer>{" "}
+          {currentUser?.email}
         </ProfileStyle>
       </HeaderStyle>
     </HeaderWrapperStyle>

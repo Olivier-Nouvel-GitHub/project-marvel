@@ -58,7 +58,6 @@ const InputField = styled.div`
 `;
 
 const InputGroup = styled.div`
-  padding-left: 1rem;
   margin-bottom: 1rem;
   width: 100%;
 `;
@@ -110,18 +109,27 @@ const Button = styled.button`
   }
 `;
 
+const AvatarContainer = styled.div`
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 0.2rem solid white;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+`;
+
 const Avatars = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   margin-top: 0.5rem;
 
   img {
     width: 3.5rem;
     height: 3.5rem;
     padding-right: 1rem;
-    clip-path: circle(40% at 40%);
+
     cursor: pointer;
   }
 `;
@@ -152,6 +160,7 @@ export const Register = () => {
         onSubmit={async (values) => {
           try {
             createNewUser(values.email, values.password, values.avatar);
+            console.log(values.avatar);
           } catch (error) {
             setErrorMessage("Identifiants invalides");
           }
@@ -203,10 +212,12 @@ export const Register = () => {
                   id="avatar-blackwidow"
                 />
                 <label htmlFor="avatar-blackwidow">
-                  <img
-                    src="https://i.ibb.co/hmVRMx5/blackwidow.png"
-                    alt="Black Widow"
-                  />
+                  <AvatarContainer>
+                    <img
+                      src="https://i.ibb.co/hmVRMx5/blackwidow.png"
+                      alt="Black Widow"
+                    />
+                  </AvatarContainer>
                 </label>
 
                 <Field
@@ -216,10 +227,12 @@ export const Register = () => {
                   id="avatar-ironman"
                 />
                 <label htmlFor="avatar-ironman">
-                  <img
-                    src="https://i.ibb.co/9bcFq2L/ironman.png"
-                    alt="Iron Man"
-                  />
+                  <AvatarContainer>
+                    <img
+                      src="https://i.ibb.co/9bcFq2L/ironman.png"
+                      alt="Iron Man"
+                    />
+                  </AvatarContainer>
                 </label>
 
                 <Field
@@ -229,7 +242,9 @@ export const Register = () => {
                   id="avatar-mask"
                 />
                 <label htmlFor="avatar-mask">
-                  <img src="https://i.ibb.co/YWpSbkp/mask.png" alt="Mask" />
+                  <AvatarContainer>
+                    <img src="https://i.ibb.co/YWpSbkp/mask.png" alt="Mask" />
+                  </AvatarContainer>
                 </label>
                 <Field
                   type="radio"
@@ -238,10 +253,12 @@ export const Register = () => {
                   id="avatar-spiderman"
                 />
                 <label htmlFor="avatar-spiderman">
-                  <img
-                    src="https://i.ibb.co/4fwPJJ2/spiderman.png"
-                    alt="Spider man"
-                  />
+                  <AvatarContainer>
+                    <img
+                      src="https://i.ibb.co/4fwPJJ2/spiderman.png"
+                      alt="Spider man"
+                    />
+                  </AvatarContainer>
                 </label>
               </Avatars>
               <ErrorMessage name="avatar" component="div" className="error" />
