@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserType } from "../../types/userType";
 
 // Initial state type
-type UserState = {
+export type UserState = {
   authenticatedUser: UserType | null;
 };
 
@@ -18,11 +18,15 @@ const userSlice = createSlice({
     setAuthenticatedUser: (state, action: PayloadAction<UserType>) => {
       state.authenticatedUser = action.payload;
     },
+    clearAuthenticatedUser(state) {
+      state.authenticatedUser = null;
+    },
   },
 });
 
 // Exportation des actions
-export const { setAuthenticatedUser } = userSlice.actions;
+export const { setAuthenticatedUser, clearAuthenticatedUser } =
+  userSlice.actions;
 
 // Exportation du reducer
 export default userSlice.reducer;

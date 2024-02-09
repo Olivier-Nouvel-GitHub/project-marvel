@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import { RootState } from "../redux/rootReducer";
 import { useSelector } from "react-redux";
+import { handleSignOut } from "../services/firebase/sign.out";
+import { useNavigate } from "react-router-dom";
 
 const HeaderWrapperStyle = styled.div``;
 
@@ -123,6 +125,7 @@ const MenuStyle = styled.nav`
 `;
 
 export const Header = () => {
+  const navigate = useNavigate();
   const currentUser = useSelector(
     (state: RootState) => state.user.authenticatedUser
   );
@@ -170,11 +173,7 @@ export const Header = () => {
           <a href="#">
             <li>Dark mode</li>
           </a>
-          <a href="https://developer.marvel.com/">
-            <li>Site de l'API Marvel</li>
-          </a>
-
-          <a href="https://developer.marvel.com/">
+          <a href="#" onClick={(e) => handleSignOut(e, navigate)}>
             <li>Se déconnecter</li>
           </a>
         </ul>
