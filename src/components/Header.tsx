@@ -160,9 +160,6 @@ export const Header = () => {
     <HeaderWrapperStyle>
       <MenuProfileStyle ref={menuRef} isVisible={isMenuVisible}>
         <ul>
-          <a href="#">
-            <li>Mon profil</li>
-          </a>
           <a href="#" onClick={(e) => handleSignOut(e, navigate)}>
             <li>Se déconnecter</li>
           </a>

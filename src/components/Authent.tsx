@@ -121,6 +121,16 @@ const BottomLinks = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
+
+  a {
+    text-decoration: none;
+    color: #084c7c;
+    font-weight: bold;
+  }
+
+  a: hover {
+    color: #2e8de6;
+  }
 `;
 
 export const Authent = () => {
