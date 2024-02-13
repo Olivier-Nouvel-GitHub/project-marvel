@@ -97,8 +97,10 @@ const Description = styled.div`
 
 export const Hero = () => {
   const dispatch = useDispatch();
+
   const handleAddToFavorites = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+    console.log(currentHero);
     if (currentHero) {
       dispatch(addFavHeroToUser(currentHero));
     }

@@ -97,7 +97,15 @@ export const HeroesList = () => {
   const [isDataLoading, setDataLoading] = useState(false);
 
   const heroSelected = (hero: HeroType) => {
-    dispatch(setHeroes(hero));
+    const heroAttributes = {
+      id: hero.id,
+      name: hero.name,
+      description: hero.name,
+      comics: hero.comics,
+      thumbnail: hero.thumbnail,
+    };
+
+    dispatch(setHeroes(heroAttributes));
   };
 
   useEffect(() => {
