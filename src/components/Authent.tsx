@@ -166,7 +166,7 @@ export const Authent = () => {
             const user: UserType = {
               email: firebaseUser.email,
               avatar: userDetails.avatar,
-              fav: userDetails.fav,
+              favHeroes: userDetails.fav,
             };
             userAuthenticated(user);
             console.log("info user :", user);
