@@ -190,10 +190,11 @@ export const Register = () => {
         validationSchema={SigninSchema}
         onSubmit={async (values) => {
           try {
-            createNewUser(values.email, values.password, values.avatar);
+            await createNewUser(values.email, values.password, values.avatar);
             setRegisterSuccessMessage(true);
           } catch (error) {
-            setErrorMessage("Identifiants invalides");
+            setErrorMessage("Un utilisateur avec cet email existe déjà.");
+            setRegisterSuccessMessage(false);
           }
         }}
       >
