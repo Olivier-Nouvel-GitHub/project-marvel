@@ -3,7 +3,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { createNewUser } from "../services/firebase/create.user";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -28,6 +28,15 @@ const Container = styled.div`
 
   .authentAccountLink {
     margin-top: 1rem;
+  }
+
+  .registerSuccessMessage {
+    width: 18rem;
+    color: white;
+    border: 1px solid green;
+    background-color: green;
+    padding: 1rem;
+    border-radius: 5px;
   }
 `;
 
@@ -156,6 +165,7 @@ const BottomLinks = styled.div`
 
 export const Register = () => {
   const [errorMessage, setErrorMessage] = useState("");
+  const [registerSuccessMessage, setRegisterSuccessMessage] = useState(false);
   const SigninSchema = Yup.object().shape({
     email: Yup.string()
       .email("Email invalide")
@@ -167,6 +177,7 @@ export const Register = () => {
 
     avatar: Yup.string().required("Veuillez choisir un avatar"),
   });
+
   return (
     <Container>
       <Formik
@@ -180,7 +191,7 @@ export const Register = () => {
         onSubmit={async (values) => {
           try {
             createNewUser(values.email, values.password, values.avatar);
-            console.log(values.avatar);
+            setRegisterSuccessMessage(true);
           } catch (error) {
             setErrorMessage("Identifiants invalides");
           }
@@ -189,6 +200,14 @@ export const Register = () => {
         <LoginBox>
           <StyledForm>
             <div className="error">{errorMessage}</div> <br />
+            {registerSuccessMessage ? (
+              <div className="registerSuccessMessage">
+                Votre compte a été crée avec succès. <br />
+                Vous pouvez vous connecter avec vos identifiants.
+              </div>
+            ) : (
+              false
+            )}
             <Title>Créer un compte</Title>
             <InputField>
               <InputGroup>
