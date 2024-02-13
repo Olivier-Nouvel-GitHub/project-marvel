@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { RootState } from "../redux/rootReducer";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addFavHeroToUser } from "../redux/slices/userSlice";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -95,10 +96,11 @@ const Description = styled.div`
 `;
 
 export const Hero = () => {
+  const dispatch = useDispatch();
   const handleAddToFavorites = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     if (currentHero) {
-      console.log("id du héro: ", currentHero.id);
+      dispatch(addFavHeroToUser(currentHero));
     }
   };
 

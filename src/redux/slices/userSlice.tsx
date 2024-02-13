@@ -46,8 +46,12 @@ const userSlice = createSlice({
 });
 
 // Exportation des actions
-export const { setAuthenticatedUser, clearAuthenticatedUser } =
-  userSlice.actions;
+export const {
+  setAuthenticatedUser,
+  clearAuthenticatedUser,
+  addFavHeroToUser,
+  removeFavHeroFromUser,
+} = userSlice.actions;
 
 // Exportation du reducer
 export default userSlice.reducer;
