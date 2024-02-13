@@ -185,7 +185,6 @@ export const Register = () => {
           email: "",
           password: "",
           avatar: "",
-          fav: { hero1: "", her2: "", hero3: "", hero4: "", hero5: "" },
         }}
         validationSchema={SigninSchema}
         onSubmit={async (values) => {
