@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { HeroType } from "../types/heroTypes";
+import { HeroType } from "../../types/heroType";
 
 // Initial state type
 type HeroState = {

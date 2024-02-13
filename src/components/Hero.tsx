@@ -95,6 +95,13 @@ const Description = styled.div`
 `;
 
 export const Hero = () => {
+  const handleAddToFavorites = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    if (currentHero) {
+      console.log("id du héro: ", currentHero.id);
+    }
+  };
+
   const currentHero = useSelector(
     (state: RootState) => state.heroes.selectedHero
   );
@@ -150,7 +157,9 @@ export const Hero = () => {
                 )}
               </li>
               <li className="addCharacter">
-                Ajouter ce personnage à mes favoris
+                <a href="#" onClick={handleAddToFavorites}>
+                  Ajouter ce personnage à mes favoris
+                </a>
               </li>
             </ul>
           </Description>
