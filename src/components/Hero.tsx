@@ -100,7 +100,7 @@ export const Hero = () => {
 
   const handleAddToFavorites = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    console.log(currentHero);
+    console.log("hero to add:", currentHero);
     if (currentHero) {
       dispatch(addFavHeroToUser(currentHero));
     }
@@ -160,7 +160,7 @@ export const Hero = () => {
                   "Ce personnage n'apparaît dans aucun comic"
                 )}
               </li>
-              <li className="addCharacter">
+              <li>
                 <a href="#" onClick={handleAddToFavorites}>
                   Ajouter ce personnage à mes favoris
                 </a>

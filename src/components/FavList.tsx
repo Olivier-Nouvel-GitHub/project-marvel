@@ -1,8 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { setHeroes } from "../redux/slices/heroesSlice";
-import { HeroType } from "../types/heroType";
-import { UserType } from "../types/userType";
+import { removeFavHeroFromUser } from "../redux/slices/userSlice";
 import { RootState } from "../redux/rootReducer";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -22,11 +19,19 @@ const SuperContainer = styled.div`
   padding-bottom: 2rem;
 `;
 
+const NoHeroFound = styled.div`
+  width: 100%;
+  text-align: center;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
 
   .heroName {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     border-left: solid black 1px;
     border-right: solid black 1px;
@@ -41,6 +46,12 @@ const Container = styled.div`
     color: #fdef16;
     font-weight: bold;
     border-top: 1px solid black;
+
+    img {
+      padding-top: 0.2rem;
+      padding-left: 0.4rem;
+      width: 1rem;
+    }
   }
 `;
 
@@ -75,26 +86,23 @@ const HeroCard = styled.div`
 
 export const FavList = () => {
   const dispatch = useDispatch();
-
-  type HeroesArray = HeroType[];
-
-  const heroSelected = (hero: HeroType) => {
-    const heroAttributes = {
-      id: hero.id,
-      name: hero.name,
-      description: hero.name,
-      comics: hero.comics,
-      thumbnail: hero.thumbnail,
+  const handleRemoveFromFavorites =
+    (heroId: number) => (event: React.MouseEvent<HTMLAnchorElement>) => {
+      event.preventDefault();
+      dispatch(removeFavHeroFromUser(heroId));
     };
-
-    dispatch(setHeroes(heroAttributes));
-  };
 
   const favHeroesList = useSelector(
     (state: RootState) => state.user.authenticatedUser?.favHeroes
   );
-  console.log(favHeroesList);
 
+  if (!favHeroesList || favHeroesList.length === 0) {
+    return (
+      <SuperContainer>
+        <NoHeroFound>Aucun héros favori trouvé.</NoHeroFound>
+      </SuperContainer>
+    );
+  }
   return (
     <SuperContainer>
       {Array.isArray(favHeroesList) ? (
@@ -102,16 +110,21 @@ export const FavList = () => {
           <Container key={hero.id}>
             <HeroCard>
               <div>
-                <Link to={`/hero`} onClick={() => heroSelected(hero)}>
-                  <img
-                    src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
-                    alt={hero.name}
-                    className={hero.name}
-                  />
-                </Link>
+                <img
+                  src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+                  alt={hero.name}
+                  className={hero.name}
+                />
               </div>
             </HeroCard>
-            <div className="heroName">{hero.name}</div>
+            <div className="heroName">
+              <div>{hero.name} </div>
+              <div>
+                <a href="#" onClick={handleRemoveFromFavorites(hero.id)}>
+                  <img src="https://i.ibb.co/cbBWvbf/cross.png" />
+                </a>
+              </div>
+            </div>
           </Container>
         ))
       ) : (
