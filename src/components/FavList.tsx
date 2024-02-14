@@ -100,17 +100,18 @@ export const FavList = () => {
     (state: RootState) => state.user.authenticatedUser?.favHeroes
   );
 
-  if (!favHeroesList || favHeroesList.length === 0) {
+  if (!favHeroesList || Object.keys(favHeroesList).length === 0) {
     return (
       <SuperContainer>
         <NoHeroFound>Aucun héros favori trouvé.</NoHeroFound>
       </SuperContainer>
     );
   }
+
   return (
     <SuperContainer>
-      {Array.isArray(favHeroesList) ? (
-        favHeroesList.map((hero) => (
+      {favHeroesList && Object.keys(favHeroesList).length > 0 ? (
+        Object.values(favHeroesList).map((hero) => (
           <Container key={hero.id}>
             <HeroCard>
               <div>
@@ -122,7 +123,7 @@ export const FavList = () => {
               </div>
             </HeroCard>
             <div className="heroName">
-              <div>{hero.name} </div>
+              <div>{hero.name}</div>
               <div>
                 <a href="#" onClick={handleRemoveFromFavorites(hero.id)}>
                   <img src="https://i.ibb.co/cbBWvbf/cross.png" />
@@ -132,7 +133,7 @@ export const FavList = () => {
           </Container>
         ))
       ) : (
-        <p>Les données des héros ne sont pas valides.</p>
+        <NoHeroFound>Les données des héros ne sont pas valides.</NoHeroFound>
       )}
     </SuperContainer>
   );

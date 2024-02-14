@@ -24,23 +24,21 @@ const userSlice = createSlice({
       state.authenticatedUser = newUser;
     },
     addFavHeroToUser: (state, action: PayloadAction<HeroType>) => {
-      const newHero = action.payload;
       if (state.authenticatedUser) {
+        const heroId = action.payload.id.toString(); // Assurez-vous que l'ID est une chaîne pour la clé d'objet
         // Vérifie si le héros est déjà dans les favoris pour éviter les doublons
-        const isHeroAlreadyFav = state.authenticatedUser.favHeroes.some(
-          (hero) => hero.id === newHero.id
-        );
-        if (!isHeroAlreadyFav) {
-          state.authenticatedUser.favHeroes.push(newHero);
+        if (!state.authenticatedUser.favHeroes[heroId]) {
+          state.authenticatedUser.favHeroes[heroId] = action.payload;
         }
       }
     },
     removeFavHeroFromUser: (state, action: PayloadAction<number>) => {
       if (state.authenticatedUser) {
-        state.authenticatedUser.favHeroes =
-          state.authenticatedUser.favHeroes.filter(
-            (hero) => hero.id !== action.payload
-          );
+        // Convertit l'ID en string pour l'utiliser comme clé
+        const heroId = action.payload.toString();
+        if (state.authenticatedUser.favHeroes[heroId]) {
+          delete state.authenticatedUser.favHeroes[heroId];
+        }
       }
     },
     clearAuthenticatedUser(state) {
