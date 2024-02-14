@@ -3,7 +3,7 @@ import { removeFavHeroFromUser } from "../redux/slices/userSlice";
 import { RootState } from "../redux/rootReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFavHeroFromUserService } from "../services/firebase/remove.fav.hero.from.user";
-import { auth } from "../config/firebase.config";
+import { getAuthId } from "../hooks/get.user.id";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -87,17 +87,14 @@ const HeroCard = styled.div`
 `;
 
 export const FavList = () => {
+  const userID = getAuthId();
   const dispatch = useDispatch();
   const handleRemoveFromFavorites =
     (heroId: number) => (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
-      removeFavHeroFromUserService();
+      removeFavHeroFromUserService(userID, heroId);
       dispatch(removeFavHeroFromUser(heroId));
     };
-
-  const currentUserId = useSelector(
-    (state: RootState) => state.user.authenticatedUser?.id
-  );
 
   const favHeroesList = useSelector(
     (state: RootState) => state.user.authenticatedUser?.favHeroes

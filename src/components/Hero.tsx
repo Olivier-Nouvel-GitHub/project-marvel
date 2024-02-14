@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { RootState } from "../redux/rootReducer";
 import { useSelector, useDispatch } from "react-redux";
 import { addFavHeroToUser } from "../redux/slices/userSlice";
+import { addFavHeroToUserService } from "../services/firebase/add.fav.hero.to.user";
+import { getAuthId } from "../hooks/get.user.id";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -97,12 +99,13 @@ const Description = styled.div`
 
 export const Hero = () => {
   const dispatch = useDispatch();
+  const userId = getAuthId();
 
   const handleAddToFavorites = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    console.log("hero to add:", currentHero);
     if (currentHero) {
       dispatch(addFavHeroToUser(currentHero));
+      addFavHeroToUserService(userId, currentHero);
     }
   };
 

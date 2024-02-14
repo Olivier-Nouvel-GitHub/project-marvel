@@ -1,5 +1,4 @@
-import { getDatabase, ref, get, update } from "firebase/database";
-import { HeroType } from "../../types/heroType";
+import { getDatabase, ref, get, set } from "firebase/database";
 
 export const removeFavHeroFromUserService = async (
   userId: string,
@@ -10,12 +9,18 @@ export const removeFavHeroFromUserService = async (
 
   try {
     const snapshot = await get(userFavHeroesRef);
-    let favHeroes = snapshot.val() ? snapshot.val() : [];
-
-    favHeroes = favHeroes.filter((h: HeroType) => h.id !== heroId);
-
-    await update(userFavHeroesRef, favHeroes);
-    console.log("Héro retiré des favoris.");
+    if (snapshot.exists()) {
+      let favHeroes = snapshot.val();
+      // On trouve la clé du héro à supprimer
+      const heroKey = Object.keys(favHeroes).find(
+        (key) => favHeroes[key].id === heroId
+      );
+      if (heroKey) {
+        // On assigne `null` à la clé pour supprimer le héro spécifique
+        await set(ref(db, `users/${userId}/favHeroes/${heroKey}`), null);
+        console.log("Héro retiré des favoris.");
+      }
+    }
   } catch (error) {
     console.error(
       "Erreur lors de la suppression d'un héro des favoris :",
