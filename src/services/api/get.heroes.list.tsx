@@ -1,7 +1,7 @@
 import axios from "axios";
 import md5 from "md5";
-import { HeroType } from "../types/heroType";
-import { baseUrl, publicKey, privateKey } from "../config/api.config";
+import { HeroType } from "../../types/heroType";
+import { baseUrl, publicKey, privateKey } from "../../config/api.config";
 
 type HeroesArray = HeroType[];
 
