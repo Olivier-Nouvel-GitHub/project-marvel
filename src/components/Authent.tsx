@@ -5,7 +5,7 @@ import { useState } from "react";
 import { auth } from "../config/firebase.config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { setAuthenticatedUser } from "../redux/slices/userSlice";
-import { UserType } from "../types/UserType";
+import { UserType } from "../types/userType";
 import { useDispatch } from "react-redux";
 import { fetchUserDetails } from "../services/firebase/fetch.user.details";
 import { Link, useNavigate } from "react-router-dom";
