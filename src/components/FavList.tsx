@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { removeFavHeroFromUser } from "../redux/slices/userSlice";
 import { RootState } from "../redux/rootReducer";
 import { useSelector, useDispatch } from "react-redux";
+import { removeFavHeroFromUserService } from "../services/firebase/remove.fav.hero.from.user";
+import { auth } from "../config/firebase.config";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -89,8 +91,13 @@ export const FavList = () => {
   const handleRemoveFromFavorites =
     (heroId: number) => (event: React.MouseEvent<HTMLAnchorElement>) => {
       event.preventDefault();
+      removeFavHeroFromUserService();
       dispatch(removeFavHeroFromUser(heroId));
     };
+
+  const currentUserId = useSelector(
+    (state: RootState) => state.user.authenticatedUser?.id
+  );
 
   const favHeroesList = useSelector(
     (state: RootState) => state.user.authenticatedUser?.favHeroes

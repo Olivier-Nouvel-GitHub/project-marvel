@@ -1,7 +1,10 @@
 import { getDatabase, ref, get, update } from "firebase/database";
 import { HeroType } from "../../types/heroType";
 
-export const removeFavHeroFromUser = async (userId: string, heroId: number) => {
+export const removeFavHeroFromUserService = async (
+  userId: string,
+  heroId: number
+) => {
   const db = getDatabase();
   const userFavHeroesRef = ref(db, `users/${userId}/favHeroes`);
 
