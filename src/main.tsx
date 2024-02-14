@@ -9,6 +9,7 @@ import { Error404 } from "./components/Error404";
 import { Doc } from "./components/Doc";
 import { Authent } from "./components/Authent";
 import { Register } from "./components/Register";
+import { FavList } from "./components/FavList";
 import styled from "styled-components";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -47,6 +48,15 @@ root.render(
                 <ProtectedRoutes>
                   <Header />
                   <Hero />
+                </ProtectedRoutes>
+              }
+            />
+            <Route
+              path="/favorites"
+              element={
+                <ProtectedRoutes>
+                  <Header />
+                  <FavList />
                 </ProtectedRoutes>
               }
             />

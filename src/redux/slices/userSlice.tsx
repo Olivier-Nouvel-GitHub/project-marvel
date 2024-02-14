@@ -17,7 +17,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setAuthenticatedUser: (state, action: PayloadAction<UserType>) => {
-      state.authenticatedUser = action.payload;
+      const newUser = {
+        ...action.payload,
+        favHeroes: action.payload.favHeroes || [],
+      };
+      state.authenticatedUser = newUser;
     },
     addFavHeroToUser: (state, action: PayloadAction<HeroType>) => {
       const newHero = action.payload;
