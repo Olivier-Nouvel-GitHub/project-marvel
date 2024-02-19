@@ -18,12 +18,18 @@ export const addFavHeroToUserService = async (
       favHeroes[hero.id] = hero;
 
       await update(userFavHeroesRef, favHeroes);
-      console.log("Héro ajouté aux favoris.");
+      return { success: true, message: "Héro ajouté aux favoris." };
     } else {
-      console.log("Le héro existe déjà dans les favoris.");
+      return {
+        success: false,
+        message: "Le héro existe déjà dans les favoris.",
+      };
     }
   } catch (error) {
-    console.error("Erreur lors de l'ajout d'un héro aux favoris :", error);
+    return {
+      success: false,
+      message: "Erreur lors de l'ajout d'un héro aux favoris.",
+    };
     throw error;
   }
 };
