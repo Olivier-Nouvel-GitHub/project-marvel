@@ -123,12 +123,12 @@ export const Hero = () => {
       const result = await addFavHeroToUserService(userId, currentHero);
       if (result.success) {
         setSuccessMessage(result.message);
+        dispatch(addFavHeroToUser(currentHero));
         setTimeout(() => setSuccessMessage(""), 3000);
       } else {
         setErrorMessage(result.message);
         setTimeout(() => setErrorMessage(""), 3000);
       }
-      dispatch(addFavHeroToUser(currentHero));
     }
   };
 
