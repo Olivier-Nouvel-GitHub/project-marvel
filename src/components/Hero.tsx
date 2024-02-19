@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addFavHeroToUser } from "../redux/slices/userSlice";
 import { addFavHeroToUserService } from "../services/firebase/add.fav.hero.to.user";
 import { getAuthId } from "../hooks/get.user.id";
+import { useState } from "react";
 
 const SuperContainer = styled.div`
   display: flex;
@@ -41,6 +42,14 @@ const Container = styled.div`
     font-weight: bold;
     border-top: 1px solid black;
   }
+`;
+const ResultMessage = styled.div`
+  padding-top: 1rem;
+  width: 100%;
+  height: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: gold;
 `;
 
 const HeroCard = styled.div`
@@ -98,80 +107,91 @@ const Description = styled.div`
 `;
 
 export const Hero = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const dispatch = useDispatch();
   const userId = getAuthId();
-
-  const handleAddToFavorites = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    if (currentHero) {
-      dispatch(addFavHeroToUser(currentHero));
-      addFavHeroToUserService(userId, currentHero);
-    }
-  };
-
   const currentHero = useSelector(
     (state: RootState) => state.heroes.selectedHero
   );
 
+  const handleAddToFavorites = async (
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    event.preventDefault();
+    if (currentHero) {
+      const result = await addFavHeroToUserService(userId, currentHero);
+      if (result.success) {
+        setSuccessMessage(result.message);
+        dispatch(addFavHeroToUser(currentHero));
+        setTimeout(() => setSuccessMessage(""), 3000);
+      } else {
+        setErrorMessage(result.message);
+        setTimeout(() => setErrorMessage(""), 3000);
+      }
+    }
+  };
+
+  // Logique de rendu conditionnel pour 'currentHero'
   if (!currentHero) {
     return <div>Aucun héros sélectionné</div>;
   }
-
-  {
-    return (
-      <div>
-        <SuperContainer>
-          <Container>
-            <HeroCard>
-              <div>
-                <img
-                  src={`${currentHero.thumbnail.path}.${currentHero.thumbnail.extension}`}
-                  alt={currentHero.name}
-                  className={currentHero.name}
-                />
-              </div>
-            </HeroCard>
-            <div className="heroName">{currentHero.name}</div>
-          </Container>
-          <Description>
-            <ul className="mainDescription">
-              <li>
-                <label>Nom :</label> {currentHero.name}
-              </li>
-              <li>
-                <label>Description :</label>{" "}
-                {currentHero.description
-                  ? currentHero.description
-                  : "Aucune description disponible"}
-              </li>
-              <li>
-                <label>Nombre de comics contenant le personnage :</label>{" "}
-                {currentHero.comics.available}
-              </li>
-              <li>
-                <label>3 premiers comics : </label>{" "}
-                {currentHero.comics.items &&
-                currentHero.comics.items.length > 0 ? (
-                  <ul>
-                    {currentHero.comics.items
-                      .slice(0, 3)
-                      .map((comic: { name: string }, index: number) => (
-                        <li key={index}>{comic.name}</li>
-                      ))}
-                  </ul>
-                ) : (
-                  "Ce personnage n'apparaît dans aucun comic"
-                )}
-              </li>
-              <li>
-                <a href="#" onClick={handleAddToFavorites}>
-                  Ajouter ce personnage à mes favoris
-                </a>
-              </li>
-            </ul>
-          </Description>
-        </SuperContainer>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <ResultMessage>
+        {successMessage} {errorMessage}
+      </ResultMessage>
+      <SuperContainer>
+        <Container>
+          <HeroCard>
+            <div>
+              <img
+                src={`${currentHero.thumbnail.path}.${currentHero.thumbnail.extension}`}
+                alt={currentHero.name}
+                className={currentHero.name}
+              />
+            </div>
+          </HeroCard>
+          <div className="heroName">{currentHero.name}</div>
+        </Container>
+        <Description>
+          <ul className="mainDescription">
+            <li>
+              <label>Nom :</label> {currentHero.name}
+            </li>
+            <li>
+              <label>Description :</label>{" "}
+              {currentHero.description
+                ? currentHero.description
+                : "Aucune description disponible"}
+            </li>
+            <li>
+              <label>Nombre de comics contenant le personnage :</label>{" "}
+              {currentHero.comics.available}
+            </li>
+            <li>
+              <label>3 premiers comics : </label>{" "}
+              {currentHero.comics.items &&
+              currentHero.comics.items.length > 0 ? (
+                <ul>
+                  {currentHero.comics.items
+                    .slice(0, 3)
+                    .map((comic: { name: string }, index: number) => (
+                      <li key={index}>{comic.name}</li>
+                    ))}
+                </ul>
+              ) : (
+                "Ce personnage n'apparaît dans aucun comic"
+              )}
+            </li>
+            <li>
+              <a href="#" onClick={handleAddToFavorites}>
+                Ajouter ce personnage à mes favoris
+              </a>
+            </li>
+          </ul>
+        </Description>
+      </SuperContainer>
+    </div>
+  );
 };
