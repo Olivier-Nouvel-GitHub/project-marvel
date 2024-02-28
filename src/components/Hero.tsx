@@ -33,8 +33,6 @@ const Container = styled.div`
     border-bottom: solid black 1px;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    margin-left: 2.5rem;
-    margin-right: 1rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     background-color: #2e8de6;
@@ -59,7 +57,7 @@ const HeroCard = styled.div`
   background-color: white;
   text-align: center;
   padding-bottom: 0.3rem;
-  margin: 1rem 1rem 0rem 2.5rem;
+  margin-top: 1rem;
   border-top: solid black 1px;
   border-left: solid black 1px;
   border-right: solid black 1px;
