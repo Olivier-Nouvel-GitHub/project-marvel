@@ -50,6 +50,7 @@ const StyledForm = styled(Form)`
 `;
 
 const LoginBox = styled.div`
+  min-width: 23rem;
   background-color: #9cd1d5;
   padding: 3rem;
   border-radius: 5px;
