@@ -86,6 +86,10 @@ const Description = styled.div`
   padding-right: 1rem;
   width: 35rem;
 
+  @media screen and (max-width: 600px) {
+    border: 0px;
+  }
+
   label {
     font-weight: bold;
   }
