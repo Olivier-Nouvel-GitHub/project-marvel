@@ -101,6 +101,7 @@ const InputComponent = styled.div`
   align-items: center;
   width: 90%;
 
+  margin-left: 1rem;
   padding-top: 0.5rem;
   margin-bottom: 1rem;
 
