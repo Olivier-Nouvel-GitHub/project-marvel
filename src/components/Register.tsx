@@ -30,6 +30,13 @@ const Container = styled.div`
     margin-top: 1rem;
   }
 
+  @media screen and (max-width: 600px) {
+    .registerSuccessMessage {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+
   .registerSuccessMessage {
     width: 18rem;
     color: white;
@@ -50,7 +57,6 @@ const StyledForm = styled(Form)`
 `;
 
 const LoginBox = styled.div`
-  min-width: 23rem;
   background-color: #9cd1d5;
   padding: 3rem;
   border-radius: 5px;
@@ -58,6 +64,10 @@ const LoginBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: 600px) {
+    padding: 1rem;
+  }
 `;
 
 const Title = styled.h2`
@@ -93,6 +103,16 @@ const InputComponent = styled.div`
 
   padding-top: 0.5rem;
   margin-bottom: 1rem;
+
+  @media screen and (max-width: 600px) {
+    .email-input {
+      margin-left: 1rem;
+    }
+
+    .password-input {
+      margin-left: 1rem;
+    }
+  }
 
   .email-input {
     width: 14rem;
@@ -133,19 +153,26 @@ const AvatarContainer = styled.div`
   cursor: pointer;
 `;
 
-const Avatars = styled.div`
+const AvatarsList = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-top: 0.5rem;
-
   img {
     width: 3.5rem;
     height: 3.5rem;
     padding-right: 1rem;
-
     cursor: pointer;
+`;
+
+const AvatarItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  @media screen and (max-width: 600px) {
+    padding-top: 1rem;
   }
 `;
 const BottomLinks = styled.div`
@@ -192,6 +219,7 @@ export const Register = () => {
           try {
             await createNewUser(values.email, values.password, values.avatar);
             setRegisterSuccessMessage(true);
+            setErrorMessage("");
           } catch (error) {
             setErrorMessage("Un utilisateur avec cet email existe déjà.");
             setRegisterSuccessMessage(false);
@@ -244,63 +272,70 @@ export const Register = () => {
             </InputField>
             <InputGroup>
               <LabelChoseAvatar>Choisissez un avatar :</LabelChoseAvatar>
-              <Avatars>
-                <Field
-                  type="radio"
-                  name="avatar"
-                  value="https://i.ibb.co/hmVRMx5/blackwidow.png"
-                  id="avatar-blackwidow"
-                />
-                <label htmlFor="avatar-blackwidow">
-                  <AvatarContainer>
-                    <img
-                      src="https://i.ibb.co/hmVRMx5/blackwidow.png"
-                      alt="Black Widow"
-                    />
-                  </AvatarContainer>
-                </label>
+              <AvatarsList>
+                <AvatarItem>
+                  <Field
+                    type="radio"
+                    name="avatar"
+                    value="https://i.ibb.co/hmVRMx5/blackwidow.png"
+                    id="avatar-blackwidow"
+                  />
+                  <label htmlFor="avatar-blackwidow">
+                    <AvatarContainer>
+                      <img
+                        src="https://i.ibb.co/hmVRMx5/blackwidow.png"
+                        alt="Black Widow"
+                      />
+                    </AvatarContainer>
+                  </label>
+                </AvatarItem>
+                <AvatarItem>
+                  <Field
+                    type="radio"
+                    name="avatar"
+                    value="https://i.ibb.co/9bcFq2L/ironman.png"
+                    id="avatar-ironman"
+                  />
+                  <label htmlFor="avatar-ironman">
+                    <AvatarContainer>
+                      <img
+                        src="https://i.ibb.co/9bcFq2L/ironman.png"
+                        alt="Iron Man"
+                      />
+                    </AvatarContainer>
+                  </label>
+                </AvatarItem>
+                <AvatarItem>
+                  <Field
+                    type="radio"
+                    name="avatar"
+                    value="https://i.ibb.co/YWpSbkp/mask.png"
+                    id="avatar-mask"
+                  />
+                  <label htmlFor="avatar-mask">
+                    <AvatarContainer>
+                      <img src="https://i.ibb.co/YWpSbkp/mask.png" alt="Mask" />
+                    </AvatarContainer>
+                  </label>
+                </AvatarItem>
+                <AvatarItem>
+                  <Field
+                    type="radio"
+                    name="avatar"
+                    value="https://i.ibb.co/4fwPJJ2/spiderman.png"
+                    id="avatar-spiderman"
+                  />
+                  <label htmlFor="avatar-spiderman">
+                    <AvatarContainer>
+                      <img
+                        src="https://i.ibb.co/4fwPJJ2/spiderman.png"
+                        alt="Spider man"
+                      />
+                    </AvatarContainer>
+                  </label>
+                </AvatarItem>
+              </AvatarsList>
 
-                <Field
-                  type="radio"
-                  name="avatar"
-                  value="https://i.ibb.co/9bcFq2L/ironman.png"
-                  id="avatar-ironman"
-                />
-                <label htmlFor="avatar-ironman">
-                  <AvatarContainer>
-                    <img
-                      src="https://i.ibb.co/9bcFq2L/ironman.png"
-                      alt="Iron Man"
-                    />
-                  </AvatarContainer>
-                </label>
-
-                <Field
-                  type="radio"
-                  name="avatar"
-                  value="https://i.ibb.co/YWpSbkp/mask.png"
-                  id="avatar-mask"
-                />
-                <label htmlFor="avatar-mask">
-                  <AvatarContainer>
-                    <img src="https://i.ibb.co/YWpSbkp/mask.png" alt="Mask" />
-                  </AvatarContainer>
-                </label>
-                <Field
-                  type="radio"
-                  name="avatar"
-                  value="https://i.ibb.co/4fwPJJ2/spiderman.png"
-                  id="avatar-spiderman"
-                />
-                <label htmlFor="avatar-spiderman">
-                  <AvatarContainer>
-                    <img
-                      src="https://i.ibb.co/4fwPJJ2/spiderman.png"
-                      alt="Spider man"
-                    />
-                  </AvatarContainer>
-                </label>
-              </Avatars>
               <ErrorMessage name="avatar" component="div" className="error" />
             </InputGroup>
             <Button type="submit">Envoyer</Button>
