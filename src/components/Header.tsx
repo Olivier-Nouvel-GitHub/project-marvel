@@ -5,6 +5,7 @@ import { RootState } from "../redux/rootReducer";
 import { useSelector } from "react-redux";
 import { handleSignOut } from "../services/firebase/sign.out";
 import { useNavigate } from "react-router-dom";
+import { MobileNav } from "../components/MobileNav";
 
 const HeaderWrapperStyle = styled.div``;
 
@@ -204,6 +205,7 @@ export const Header = () => {
           </ProfileAvatarContainer>{" "}
           {currentUser?.email}
         </ProfileStyle>
+        <MobileNav></MobileNav>
       </HeaderStyle>
     </HeaderWrapperStyle>
   );
