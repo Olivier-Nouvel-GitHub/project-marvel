@@ -29,6 +29,7 @@ export const MobileNav = () => {
       }
 
       .navbar-toggle {
+        margin-bottom: -0.2rem;
         width: 5rem;
         height: 2rem;
         margin-top: 8rem;
