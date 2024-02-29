@@ -26,6 +26,9 @@ const HeaderStyle = styled.div`
 `;
 
 const MenuProfileStyle = styled.div<{ isVisible: boolean }>`
+  @media screen and (max-width: 600px) {
+    left: 0rem;
+  }
   width: 15rem;
   border: solid 0.05rem white;
   position: absolute;
@@ -90,6 +93,10 @@ const ProfileAvatarContainer = styled.div`
 `;
 
 const MenuStyle = styled.nav`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
   color: blue;
   font-size: 18px;
   font-weight: bold;
