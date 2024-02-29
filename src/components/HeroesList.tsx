@@ -11,7 +11,7 @@ const SuperContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   background-color: #9cd1d5;
   width: 80%;
   margin-top: 2rem;
@@ -42,10 +42,17 @@ const Container = styled.div`
     color: #fdef16;
     font-weight: bold;
     border-top: 1px solid black;
+
+    @media screen and (max-width: 600px) {
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 `;
 
 const HeroCard = styled.div`
+  display: flex;
+  justify-content: center;
   overflow: hidden;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -60,13 +67,19 @@ const HeroCard = styled.div`
   height: 14rem;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
 
+  @media screen and (max-width: 600px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
   img {
     transform: scale(var(--img-scale));
     transition: transform 0.5s ease;
     min-height: 15rem;
-    width: 100%;
-    height: 100%;
+    width: 110%;
+    height: auto;
     object-fit: cover;
+    padding-right: 1rem;
   }
 
   img:hover {

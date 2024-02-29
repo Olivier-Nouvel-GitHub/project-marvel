@@ -5,6 +5,7 @@ import { RootState } from "../redux/rootReducer";
 import { useSelector } from "react-redux";
 import { handleSignOut } from "../services/firebase/sign.out";
 import { useNavigate } from "react-router-dom";
+import { MobileNav } from "../components/MobileNav";
 
 const HeaderWrapperStyle = styled.div``;
 
@@ -26,6 +27,9 @@ const HeaderStyle = styled.div`
 `;
 
 const MenuProfileStyle = styled.div<{ isVisible: boolean }>`
+  @media screen and (max-width: 600px) {
+    left: 0rem;
+  }
   width: 15rem;
   border: solid 0.05rem white;
   position: absolute;
@@ -90,6 +94,10 @@ const ProfileAvatarContainer = styled.div`
 `;
 
 const MenuStyle = styled.nav`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
   color: blue;
   font-size: 18px;
   font-weight: bold;
@@ -197,6 +205,7 @@ export const Header = () => {
           </ProfileAvatarContainer>{" "}
           {currentUser?.email}
         </ProfileStyle>
+        <MobileNav></MobileNav>
       </HeaderStyle>
     </HeaderWrapperStyle>
   );
