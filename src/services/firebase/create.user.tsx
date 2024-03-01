@@ -15,8 +15,6 @@ export const createNewUser = async (
     );
     const user = userCredential.user;
 
-    console.log("Nouvel utilisateur créé avec UID :", user.uid);
-
     // On sauvegarde les détails du profil utilisateur dans la BDD
     await saveUserDetailsToDatabase(user.uid, avatar);
 
@@ -37,14 +35,7 @@ export const saveUserDetailsToDatabase = async (
   try {
     // On enregistre les détails supp du profil dans la BDD
     await set(userRef, { avatar });
-    console.log(
-      "Détails du profil enregistrés avec succès dans la base de données."
-    );
   } catch (error) {
-    console.error(
-      "Erreur lors de l'enregistrement des détails du profil dans la base de données :",
-      error
-    );
     throw error;
   }
 };

@@ -9,9 +9,6 @@ export const handleSignOut = async (
 
   try {
     await auth.signOut();
-    console.log("Utilisateur déconnecté avec succès");
     navigate("/");
-  } catch (error) {
-    console.error("Erreur lors de la déconnexion :", error);
-  }
+  } catch (error) {}
 };
