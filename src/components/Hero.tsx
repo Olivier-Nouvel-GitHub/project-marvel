@@ -82,6 +82,7 @@ const Description = styled.div`
   padding-top: 1rem;
   padding-bottom: 2rem;
   padding-right: 1rem;
+  margin-left: 1rem;
   width: 35rem;
 
   @media screen and (max-width: 600px) {
