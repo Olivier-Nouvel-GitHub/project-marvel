@@ -18,14 +18,9 @@ export const removeFavHeroFromUserService = async (
       if (heroKey) {
         // On assigne `null` à la clé pour supprimer le héro spécifique
         await set(ref(db, `users/${userId}/favHeroes/${heroKey}`), null);
-        console.log("Héro retiré des favoris.");
       }
     }
   } catch (error) {
-    console.error(
-      "Erreur lors de la suppression d'un héro des favoris :",
-      error
-    );
     throw error;
   }
 };
