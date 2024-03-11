@@ -7,11 +7,9 @@ export async function fetchUserDetails(uid: string) {
     if (snapshot.exists()) {
       return snapshot.val();
     } else {
-      console.log("No user details found.");
       return null;
     }
   } catch (error) {
-    console.error("Error fetching user details:", error);
     throw error;
   }
 }
