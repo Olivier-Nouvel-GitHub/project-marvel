@@ -169,6 +169,7 @@ export const Authent = () => {
               favHeroes: userDetails.favHeroes,
             };
             userAuthenticated(user);
+            console.log("info user :", user);
             navigate("/heroesList");
           } catch (error) {
             setErrorMessage("Erreur : Identifiants invalides");
